@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
+import UploadPage from './pages/UploadPage';
 import './App.css';
 
 function App() {
@@ -15,6 +16,10 @@ function App() {
         <Route
           path="/dashboard"
           element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/upload"
+          element={isAuthenticated ? <UploadPage /> : <Navigate to="/login" />}
         />
         <Route path="/" element={<Navigate to={isAuthenticated ? '/dashboard' : '/login'} />} />
       </Routes>
