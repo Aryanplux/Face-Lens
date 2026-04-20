@@ -16,7 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:5173") // React Vite default port
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"}) // React Vite default port
 public class AuthController {
 
     @Autowired

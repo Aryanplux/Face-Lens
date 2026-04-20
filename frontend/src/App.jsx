@@ -3,10 +3,15 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import UploadPage from './pages/UploadPage';
+import Landing from './pages/Landing';
 import './App.css';
+import './index.css';
 
 function App() {
-  const isAuthenticated = !!localStorage.getItem('token');
+  const PrivateRoute = ({ children }) => {
+    const isAuthenticated = !!localStorage.getItem('token');
+    return isAuthenticated ? children : <Navigate to="/login" />;
+  };
 
   return (
     <Router>
@@ -15,13 +20,21 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route
           path="/dashboard"
-          element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
         />
         <Route
           path="/upload"
-          element={isAuthenticated ? <UploadPage /> : <Navigate to="/login" />}
+          element={
+            <PrivateRoute>
+              <UploadPage />
+            </PrivateRoute>
+          }
         />
-        <Route path="/" element={<Navigate to={isAuthenticated ? '/dashboard' : '/login'} />} />
+        <Route path="/" element={<Landing />} />
       </Routes>
     </Router>
   );

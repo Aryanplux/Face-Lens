@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/Dashboard.css';
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
   const [photos, setPhotos] = useState([]);
+  const [theme, setTheme] = useState('light');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,7 +15,18 @@ export default function Dashboard() {
       return;
     }
     setUser(JSON.parse(storedUser));
+    
+    const savedTheme = localStorage.getItem('facelens-theme') || 'light';
+    setTheme(savedTheme);
+    document.documentElement.setAttribute('data-theme', savedTheme);
   }, [navigate]);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('facelens-theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -28,16 +40,32 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className={`dashboard-container ${theme}`}>
       <nav className="navbar">
         <div className="navbar-content">
-          <h1 className="app-title">🎭 FaceLens</h1>
+          <Link to="/" className="logo-container">
+            <img src="/FaceLens.svg" alt="FaceLens Logo" className="navbar-logo" />
+            <h1 className="app-title">FaceLens</h1>
+          </Link>
           {user && (
-            <div className="user-info">
-              <span className="username">{user.username}</span>
-              <button onClick={handleLogout} className="btn-logout">
-                Logout
+            <div className="user-actions">
+              <button 
+                onClick={toggleTheme} 
+                className="theme-toggle"
+                title={theme === 'light' ? "Switch to Night Mode" : "Switch to Light Mode"}
+              >
+                {theme === 'light' ? (
+                  <img src="https://img.icons8.com/ios-filled/24/1a2b4c/moon-symbol.png" alt="Moon icon" />
+                ) : (
+                  <img src="https://img.icons8.com/ios-filled/24/ffffff/sun--v1.png" alt="Sun icon" />
+                )}
               </button>
+              <div className="user-info">
+                <span className="username">{user.username}</span>
+                <button onClick={handleLogout} className="btn-logout">
+                  Logout
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -45,7 +73,7 @@ export default function Dashboard() {
 
       <main className="dashboard-main">
         <section className="welcome-section">
-          <h2>Welcome, {user?.firstName || user?.username}! 👋</h2>
+          <h2>Welcome, {user?.firstName || user?.username}!</h2>
           <p>Upload and analyze photos with face recognition</p>
         </section>
 
@@ -53,7 +81,7 @@ export default function Dashboard() {
           <div className="section-header">
             <h3>Your Photos</h3>
             <button onClick={handleUploadPhoto} className="btn-upload">
-              + Upload Photo
+              Upload Photo
             </button>
           </div>
 
@@ -78,15 +106,15 @@ export default function Dashboard() {
 
         <section className="stats-section">
           <div className="stat-card">
-            <h4>Total Photos</h4>
+            <h4>TOTAL PHOTOS</h4>
             <p className="stat-value">{photos.length}</p>
           </div>
           <div className="stat-card">
-            <h4>Account Status</h4>
+            <h4>ACCOUNT STATUS</h4>
             <p className="stat-value">Active</p>
           </div>
           <div className="stat-card">
-            <h4>Member Since</h4>
+            <h4>MEMBER SINCE</h4>
             <p className="stat-value">{new Date().getFullYear()}</p>
           </div>
         </section>
