@@ -16,10 +16,30 @@ const CreateEvent = () => {
 
     const handleCreateEvent = async (e) => {
         e.preventDefault();
-        // Add your API call to create an event here
-        console.log('Creating event:', { eventName, password });
-        // Redirect to the event dashboard or login page after creation
-        navigate('/events/login');
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch('http://localhost:9090/api/events', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ name: eventName, password })
+            });
+
+            if (response.ok) {
+                const event = await response.json();
+                console.log('Created event:', event);
+                // Redirect directly to the upload page for this new event
+                navigate(`/upload?eventId=${event.id}`);
+            } else {
+                const text = await response.text();
+                alert(`Failed to create event: ${text}`);
+            }
+        } catch (error) {
+            console.error('Error creating event:', error);
+            alert('An error occurred while creating the event.');
+        }
     };
 
     const toggleTheme = () => {
