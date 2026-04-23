@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.Event;
 import com.example.demo.entity.Photo;
 import com.example.demo.entity.User;
 import com.example.demo.repository.PhotoRepository;
@@ -30,7 +31,7 @@ import java.util.zip.ZipInputStream;
 
 @RestController
 @RequestMapping("/api/photos")
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174", "http://localhost:5175"})
+@CrossOrigin(origins = { "http://localhost:5173", "http://localhost:5174", "http://localhost:5175" })
 public class PhotoController {
 
     @Autowired
@@ -63,7 +64,8 @@ public class PhotoController {
 
     @PostMapping("/upload")
     public ResponseEntity<?> uploadPhotos(@RequestHeader("Authorization") String authHeader,
-                                          @RequestParam("files") MultipartFile[] files) {
+            @RequestParam("files") MultipartFile[] files,
+            @RequestParam("eventId") Long eventId) {
         User user = getAuthenticatedUser(authHeader);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or missing token");
@@ -73,8 +75,8 @@ public class PhotoController {
 
         for (MultipartFile file : files) {
             try {
-                PhotoStorageService.StorageResult result = photoStorageService.storePhoto(file, user.getId());
-                
+                PhotoStorageService.StorageResult result = photoStorageService.storePhoto(file, user.getId(), eventId);
+
                 Photo photo = new Photo();
                 photo.setFilename(file.getOriginalFilename());
                 photo.setFilePath(result.filePath);
@@ -82,6 +84,10 @@ public class PhotoController {
                 photo.setUser(user);
                 photo.setStatus("PENDING");
                 photo.setUploadedAt(new Date());
+                
+                Event event = new Event();
+                event.setId(eventId);
+                photo.setEvent(event);
 
                 savedPhotos.add(photoRepository.save(photo));
             } catch (IOException e) {
@@ -95,7 +101,8 @@ public class PhotoController {
 
     @PostMapping("/upload-zip")
     public ResponseEntity<?> uploadZipPhotos(@RequestHeader("Authorization") String authHeader,
-                                             @RequestParam("file") MultipartFile zipFile) {
+            @RequestParam("file") MultipartFile zipFile,
+            @RequestParam("eventId") Long eventId) {
         User user = getAuthenticatedUser(authHeader);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or missing token");
@@ -117,7 +124,8 @@ public class PhotoController {
                     byte[] bytes = zis.readAllBytes();
                     ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 
-                    PhotoStorageService.StorageResult result = photoStorageService.storePhoto(bais, zipEntry.getName(), user.getId());
+                    PhotoStorageService.StorageResult result = photoStorageService.storePhoto(bais, zipEntry.getName(),
+                            user.getId(), eventId);
                     Photo photo = new Photo();
                     photo.setFilename(zipEntry.getName());
                     photo.setFilePath(result.filePath);
@@ -126,13 +134,17 @@ public class PhotoController {
                     photo.setStatus("PENDING");
                     photo.setUploadedAt(new Date());
 
+                    Event event = new Event();
+                    event.setId(eventId);
+                    photo.setEvent(event);
+
                     savedPhotos.add(photoRepository.save(photo));
                 }
                 zipEntry = zis.getNextEntry();
             }
         } catch (IOException e) {
-             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body("Failed to process zip file: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to process zip file: " + e.getMessage());
         }
 
         return ResponseEntity.ok(savedPhotos);
@@ -150,8 +162,10 @@ public class PhotoController {
     }
 
     @GetMapping("/{id}/thumbnail")
-    public ResponseEntity<Resource> getPhotoThumbnail(@RequestHeader("Authorization") String authHeader, @PathVariable Long id) {
-        // Simple security check optional if tokens are sent in header, but for image src, usually token is handled differently or passed via query.
+    public ResponseEntity<Resource> getPhotoThumbnail(@RequestHeader("Authorization") String authHeader,
+            @PathVariable Long id) {
+        // Simple security check optional if tokens are sent in header, but for image
+        // src, usually token is handled differently or passed via query.
         // Assuming client attaches header for this call (e.g. via fetch API).
         User user = getAuthenticatedUser(authHeader);
         if (user == null) {
@@ -169,7 +183,8 @@ public class PhotoController {
 
             if (resource.exists() || resource.isReadable()) {
                 return ResponseEntity.ok()
-                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                        .header(HttpHeaders.CONTENT_DISPOSITION,
+                                "attachment; filename=\"" + resource.getFilename() + "\"")
                         .contentType(MediaType.IMAGE_JPEG)
                         .body(resource);
             } else {
@@ -195,7 +210,7 @@ public class PhotoController {
         Photo photo = photoOpt.get();
         photoStorageService.deleteFileByRelativePath(photo.getFilePath());
         photoStorageService.deleteFileByRelativePath(photo.getThumbnailPath());
-        
+
         photoRepository.delete(photo);
 
         return ResponseEntity.ok("Photo deleted successfully");

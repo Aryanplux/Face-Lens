@@ -4,6 +4,9 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import UploadPage from './pages/UploadPage';
 import Landing from './pages/Landing';
+import CreateEvent from './pages/CreateEvent';
+import EventLogin from './pages/EventLogin';
+import EventGallery from './pages/EventGallery';
 import './App.css';
 import './index.css';
 
@@ -35,6 +38,9 @@ function App() {
           }
         />
         <Route path="/" element={<Landing />} />
+        <Route path="/events/create" element={<CreateEvent />} />
+        <Route path="/events/login" element={<EventLogin />} />
+        <Route path="/events/:eventName" element={<EventGallery />} />
       </Routes>
     </Router>
   );

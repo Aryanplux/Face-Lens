@@ -31,11 +31,11 @@ public class PhotoStorageService {
         }
     }
 
-    public StorageResult storePhoto(MultipartFile file, Long userId) throws IOException {
-        return storePhoto(file.getInputStream(), file.getOriginalFilename(), userId);
+    public StorageResult storePhoto(MultipartFile file, Long userId, Long eventId) throws IOException {
+        return storePhoto(file.getInputStream(), file.getOriginalFilename(), userId, eventId);
     }
 
-    public StorageResult storePhoto(java.io.InputStream inputStream, String originalFilename, Long userId) throws IOException {
+    public StorageResult storePhoto(java.io.InputStream inputStream, String originalFilename, Long userId, Long eventId) throws IOException {
         if (originalFilename == null) {
             originalFilename = "unknown.jpg";
         }
@@ -49,21 +49,21 @@ public class PhotoStorageService {
         }
         String uniqueFilename = UUID.randomUUID().toString() + extension;
 
-        // User directory: uploads/{userId}/photos
-        Path userPhotosDir = Paths.get(baseUploadDir, String.valueOf(userId), "photos");
-        Files.createDirectories(userPhotosDir);
+        // User directory: uploads/{userId}/{eventId}/photos
+        Path userEventPhotosDir = Paths.get(baseUploadDir, String.valueOf(userId), String.valueOf(eventId), "photos");
+        Files.createDirectories(userEventPhotosDir);
         
-        Path targetPath = userPhotosDir.resolve(uniqueFilename);
+        Path targetPath = userEventPhotosDir.resolve(uniqueFilename);
         Files.copy(inputStream, targetPath, StandardCopyOption.REPLACE_EXISTING);
 
         // Generate thumbnail
         String thumbFilename = "thumb_" + uniqueFilename;
-        Path thumbPath = userPhotosDir.resolve(thumbFilename);
+        Path thumbPath = userEventPhotosDir.resolve(thumbFilename);
         generateThumbnail(targetPath.toFile(), thumbPath.toFile(), 200);
 
         // Return relative paths to save in DB
-        String relativeFilePath = Paths.get(String.valueOf(userId), "photos", uniqueFilename).toString().replace("\\", "/");
-        String relativeThumbPath = Paths.get(String.valueOf(userId), "photos", thumbFilename).toString().replace("\\", "/");
+        String relativeFilePath = Paths.get(String.valueOf(userId), String.valueOf(eventId), "photos", uniqueFilename).toString().replace("\\", "/");
+        String relativeThumbPath = Paths.get(String.valueOf(userId), String.valueOf(eventId), "photos", thumbFilename).toString().replace("\\", "/");
 
         return new StorageResult(relativeFilePath, relativeThumbPath);
     }

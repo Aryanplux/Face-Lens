@@ -85,6 +85,11 @@ const UploadPage = () => {
       const endpoint = isZip ? '/api/photos/upload-zip' : '/api/photos/upload';
       const token = localStorage.getItem('token');
       
+      const eventId = new URLSearchParams(window.location.search).get('eventId');
+      if (eventId) {
+        formData.append('eventId', eventId);
+      }
+
       const response = await fetch(`http://localhost:9090${endpoint}`, {
         method: 'POST',
         headers: {
