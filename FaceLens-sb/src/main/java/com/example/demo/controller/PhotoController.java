@@ -28,6 +28,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import com.example.demo.service.FaceDetectionService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.example.demo.service.MlService;
 
 @RestController
 @RequestMapping("/api/photos")
@@ -45,6 +49,12 @@ public class PhotoController {
 
     @Autowired
     private PhotoStorageService photoStorageService;
+
+    @Autowired
+    private FaceDetectionService faceDetectionService;
+
+    @Autowired
+    private MlService mlService;
 
     @Value("${app.upload.dir}")
     private String baseUploadDir;
@@ -89,7 +99,16 @@ public class PhotoController {
                 event.setId(eventId);
                 photo.setEvent(event);
 
-                savedPhotos.add(photoRepository.save(photo));
+                Photo savedPhoto = photoRepository.save(photo);
+                savedPhotos.add(savedPhoto);
+
+                // Trigger async ML face detection
+                faceDetectionService.detectAndSaveFaces(
+                    savedPhoto.getId(), 
+                    file.getBytes(), 
+                    file.getOriginalFilename(), 
+                    file.getContentType()
+                );
             } catch (IOException e) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body("Failed to store file " + file.getOriginalFilename() + ": " + e.getMessage());
@@ -138,7 +157,16 @@ public class PhotoController {
                     event.setId(eventId);
                     photo.setEvent(event);
 
-                    savedPhotos.add(photoRepository.save(photo));
+                    Photo savedPhoto = photoRepository.save(photo);
+                    savedPhotos.add(savedPhoto);
+
+                    // Trigger async ML face detection
+                    faceDetectionService.detectAndSaveFaces(
+                        savedPhoto.getId(), 
+                        bytes, 
+                        zipEntry.getName(), 
+                        "image/jpeg"
+                    );
                 }
                 zipEntry = zis.getNextEntry();
             }
@@ -198,21 +226,111 @@ public class PhotoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePhoto(@RequestHeader("Authorization") String authHeader, @PathVariable Long id) {
         User user = getAuthenticatedUser(authHeader);
+        
         if (user == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
         Optional<Photo> photoOpt = photoRepository.findById(id);
         if (photoOpt.isEmpty() || !photoOpt.get().getUser().getId().equals(user.getId())) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Photo not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-
+        
         Photo photo = photoOpt.get();
         photoStorageService.deleteFileByRelativePath(photo.getFilePath());
         photoStorageService.deleteFileByRelativePath(photo.getThumbnailPath());
+        
+        photoRepository.delete(photoOpt.get());
+        return ResponseEntity.ok().build();
+    }
 
-        photoRepository.delete(photo);
+    @PostMapping("/search-face")
+    public ResponseEntity<?> searchByFace(
+            @RequestParam(required = false) String authHeader, // Auth could be optional for public galleries
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("eventId") Long eventId) {
+            
+        try {
+            // 1. Get embedding for the uploaded target face
+            String targetFaceDataRaw = mlService.getFaceData(file);
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode targetJson = mapper.readTree(targetFaceDataRaw);
+            JsonNode targetFaces = targetJson.get("faces");
+            
+            if (targetFaces == null || !targetFaces.isArray() || targetFaces.isEmpty()) {
+                return ResponseEntity.badRequest().body("No faces detected in the uploaded image");
+            }
+            
+            // Assume the largest/most prominent face is the target
+            String targetEmbedding = targetFaces.get(0).get("embedding").asText();
+            
+            // 2. Fetch all photos for this event that have faceData
+            List<Photo> eventPhotos = photoRepository.findByEventId(eventId);
+            
+            List<String> galleryEmbeddings = new ArrayList<>();
+            List<Photo> galleryPhotos = new ArrayList<>(); // Keep track of which embedding belongs to which photo
+            
+            for (Photo photo : eventPhotos) {
+                if (photo.getFaceData() != null) {
+                    try {
+                        JsonNode photoData = mapper.readTree(photo.getFaceData());
+                        JsonNode facesInPhoto = photoData.get("faces");
+                        if (facesInPhoto != null && facesInPhoto.isArray()) {
+                            for (JsonNode faceInPhoto : facesInPhoto) {
+                                galleryEmbeddings.add(faceInPhoto.get("embedding").asText());
+                                galleryPhotos.add(photo); // One photo might have multiple faces, so it could appear multiple times here
+                            }
+                        }
+                    } catch (Exception e) {// ignore parsing error for individual photo
+                    } 
+                }
+            }
+            
+            if (galleryEmbeddings.isEmpty()) {
+                return ResponseEntity.ok(new ArrayList<>());
+            }
+            
+            // 3. Call ML service to bulk compare
+            List<Integer> matchIndices = mlService.bulkCompare(targetEmbedding, galleryEmbeddings);
+            
+            // 4. Map match indices back to Photos (and eliminate duplicates if a photo had multiple matching faces somehow, though unlikely)
+            List<Photo> matchedPhotos = new ArrayList<>();
+            for (Integer index : matchIndices) {
+                Photo matchedPhoto = galleryPhotos.get(index);
+                if (!matchedPhotos.contains(matchedPhoto)) {
+                    matchedPhotos.add(matchedPhoto);
+                }
+            }
+            
+            return ResponseEntity.ok(matchedPhotos);
+            
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error processing face search: " + e.getMessage());
+        }
+    }
 
-        return ResponseEntity.ok("Photo deleted successfully");
+    @PostMapping("/reprocess-all")
+    public ResponseEntity<?> reprocessAllPhotos() {
+        List<Photo> allPhotos = photoRepository.findAll();
+        int count = 0;
+        for (Photo photo : allPhotos) {
+            if (photo.getFaceData() == null) {
+                try {
+                    Path filePath = Paths.get(baseUploadDir).resolve(photo.getFilePath());
+                    byte[] fileBytes = java.nio.file.Files.readAllBytes(filePath);
+                    faceDetectionService.detectAndSaveFaces(
+                            photo.getId(), 
+                            fileBytes, 
+                            photo.getFilename(), 
+                            "image/jpeg"
+                    );
+                    count++;
+                } catch (Exception e) {
+                    System.out.println("Failed to reprocess photo " + photo.getId() + ": " + e.getMessage());
+                }
+            }
+        }
+        return ResponseEntity.ok("Reprocessed " + count + " photos that were missing face data.");
     }
 }

@@ -1,0 +1,339 @@
+2026-04-27 19:08:06.281125+05:30 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:08:16.103914+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:25.015440+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:25.697094+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:26.371593+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:27.025126+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:27.683268+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:34.375903+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:41.043811+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:41.769807+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:42.445934+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:49.287743+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:55.868843+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:56.564804+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:11:57.224943+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:03.794370+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:10.470396+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:11.181272+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:18.123987+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:18.822609+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:25.543757+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:26.229546+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:26.892490+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:33.447255+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:34.162479+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:40.833772+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:47.347264+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:48.085593+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":217,""x"":291,""h"":223,""w"":222},""embedding"":""AAAA4L... (1445)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:48.761232+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:49.400903+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:55.816477+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:12:56.516041+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:02.953755+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:03.820254+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:10.586170+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:11.283242+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:17.845444+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:24.291095+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:24.972810+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:25.639429+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:26.323047+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:32.659937+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:39.575955+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:40.658919+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:41.802773+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:49.005655+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:13:55.505110+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:14:02.695257+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:14:03.362305+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:14:09.984626+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:14:10.692289+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":217,""x"":291,""h"":223,""w"":222},""embedding"":""AAAA4L... (1445)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:14:11.352974+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:14:17.826816+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:14:24.112329+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:14:30.723702+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:14:40.816524+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:12.345403+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:27.368607+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:28.042807+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:28.699070+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:29.379674+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:30.109254+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:30.789514+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:37.578524+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:44.684866+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:52.591819+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:53.309622+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:15:53.973243+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:01.578610+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:08.136940+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:08.837864+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:09.500263+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:16.117829+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:16.849673+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:24.163891+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:24.883328+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:34.554191+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:43.946107+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:44.909624+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:45.998779+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":217,""x"":291,""h"":223,""w"":222},""embedding"":""AAAA4L... (1445)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:16:55.304734+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:04.705212+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:14.651841+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:24.244902+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:33.516358+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:35.978246+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:36.692823+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:37.378255+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:38.072499+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:38.766484+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:39.426702+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:40.095596+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:46.756116+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:53.320655+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:17:59.811595+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:00.522577+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:01.155935+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:07.614818+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:14.013586+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:20.270014+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:20.939468+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:21.629802+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:28.345897+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:29.011123+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:35.488535+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:36.147485+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":247,""x"":76,""h"":385,""w"":385},""embedding"":""AAAAgAB... (1444)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:42.607835+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:43.311607+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":217,""x"":291,""h"":223,""w"":222},""embedding"":""AAAA4L... (1445)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:18:51.786975+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:19:02.410216+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:19:12.276392+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:19:19.372383+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]
+2026-04-27 19:19:28.417950+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "FACE_DATA CHARACTER VARYING(255)": "'{""faces"":[{""bounding_box"":{""y"":1402,""x"":958,""h"":798,""w"":798},""embedding"":""AAAAY... (1446)"; SQL statement:
+update photos set created_at=?,description=?,event_id=?,face_data=?,file_path=?,filename=?,status=?,thumbnail_path=?,updated_at=?,uploaded_at=?,user_id=? where id=? [22001-240]

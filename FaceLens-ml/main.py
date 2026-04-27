@@ -13,6 +13,10 @@ class CompareRequest(BaseModel):
     embedding1: str # Base64 encoded string
     embedding2: str # Base64 encoded string
 
+class BulkCompareRequest(BaseModel):
+    target_embedding: str
+    gallery_embeddings: list[str]
+
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
@@ -67,6 +71,40 @@ def compare_faces(req: CompareRequest):
             "distance": float(distances[0]),
             "similarity": float(similarity)
         }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/bulk_compare")
+def bulk_compare_faces(req: BulkCompareRequest):
+    try:
+        # Decode target embedding
+        target_bytes = base64.b64decode(req.target_embedding)
+        target_emb = np.frombuffer(target_bytes, dtype=np.float64)
+        
+        # Decode gallery embeddings
+        gallery_embs = []
+        for g_emb_b64 in req.gallery_embeddings:
+            g_bytes = base64.b64decode(g_emb_b64)
+            g_emb = np.frombuffer(g_bytes, dtype=np.float64)
+            gallery_embs.append(g_emb)
+            
+        if not gallery_embs:
+            return {"matches": []}
+            
+        distances = face_recognition.face_distance(gallery_embs, target_emb)
+        
+        results = []
+        for i, distance in enumerate(distances):
+            is_match = distance < 0.55 # Using a slightly stricter threshold to avoid false positives
+            similarity = 1.0 - distance
+            results.append({
+                "index": i,
+                "is_match": bool(is_match),
+                "distance": float(distance),
+                "similarity": float(similarity) # Convert distance to similarity
+            })
+            
+        return {"matches": results}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
