@@ -8,3 +8,56 @@ html, body, #root {
   height: 100%;
   width: 100%;
 }
+
+.global-logo-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  z-index: 1000;
+}
+.global-logo-img {
+  height: 48px;
+  width: auto;
+}
+.global-brand-name {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@font-face {
+  font-family: 'Bisteron';
+  src: url('/fonts/Bisteron.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1, h2, h3, .brand-name, .global-brand-name {
+  font-family: 'Bisteron', sans-serif;
+  font-weight: normal; /* Often needed for decorative fonts */
+}
+
+.global-theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+.global-theme-toggle:hover {
+  background-color: rgba(128, 128, 128, 0.1);
+}

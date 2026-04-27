@@ -5,6 +5,7 @@ import '../styles/CreateEvent.css';
 const CreateEvent = () => {
     const [eventName, setEventName] = useState('');
     const [password, setPassword] = useState('');
+    const [description, setDescription] = useState('');
     const [theme, setTheme] = useState('light');
     const navigate = useNavigate();
 
@@ -24,7 +25,7 @@ const CreateEvent = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ name: eventName, password })
+                body: JSON.stringify({ name: eventName, password, description })
             });
 
             if (response.ok) {
@@ -51,13 +52,6 @@ const CreateEvent = () => {
 
     return (
         <div className={`create-event-container ${theme}`}>
-            <button className="theme-toggle" onClick={toggleTheme}>
-                {theme === 'light' ? (
-                  <img src="https://img.icons8.com/ios-filled/24/1a2b4c/moon-symbol.png" alt="Moon icon" />
-                ) : (
-                  <img src="https://img.icons8.com/ios-filled/24/ffffff/sun--v1.png" alt="Sun icon" />
-                )}
-            </button>
             <form onSubmit={handleCreateEvent} className="create-event-form">
                 <h2>Create New Event</h2>
                 <div className="input-group">
@@ -78,6 +72,16 @@ const CreateEvent = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
+                    />
+                </div>
+                <div className="input-group">
+                    <label htmlFor="description">Event Description</label>
+                    <textarea
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Add a hint, venue, or any special thing..."
+                        rows="3"
                     />
                 </div>
                 <button type="submit" className="create-event-button">Create Event</button>

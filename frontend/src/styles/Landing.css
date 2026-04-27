@@ -302,3 +302,8 @@
 .theme-toggle:hover {
   background-color: rgba(128, 128, 128, 0.1);
 }
+.landing-theme-toggle {
+  position: static !important;
+  top: auto !important;
+  right: auto !important;
+}

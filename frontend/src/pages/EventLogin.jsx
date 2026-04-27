@@ -31,13 +31,6 @@ const EventLogin = () => {
 
     return (
         <div className={`event-login-container ${theme}`}>
-            <button className="theme-toggle" onClick={toggleTheme}>
-                {theme === 'light' ? (
-                  <img src="https://img.icons8.com/ios-filled/24/1a2b4c/moon-symbol.png" alt="Moon icon" />
-                ) : (
-                  <img src="https://img.icons8.com/ios-filled/24/ffffff/sun--v1.png" alt="Sun icon" />
-                )}
-            </button>
             <form onSubmit={handleLogin} className="event-login-form">
                 <h2>Event Login</h2>
                 <div className="input-group">

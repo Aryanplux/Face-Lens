@@ -105,9 +105,14 @@ const UploadPage = () => {
 
       setProgress(100);
       setMessage('Upload successful! ML Processing will begin shortly.');
+      localStorage.setItem('lastUploadTime', new Date().toISOString());
       
-      // Navigate to dashboard or gallery after a delay
-      setTimeout(() => navigate('/dashboard'), 2000);
+      // Clear files to allow further uploads for the same event
+      setTimeout(() => {
+          setFiles([]);
+          setProgress(0);
+          setMessage('');
+      }, 3000);
       
     } catch (err) {
       setMessage(`Error: ${err.message}`);
@@ -121,12 +126,20 @@ const UploadPage = () => {
   };
 
   return (
-    <div className="upload-container">
-      <div className="upload-header">
-        <h2>Upload Photos</h2>
-        <p>Drag & drop images, or upload a .zip file to get started.</p>
-        <button className="back-btn" onClick={() => navigate('/dashboard')}>Back to Dashboard</button>
+    <div className="upload-page-wrapper">
+      <div className="top-bar">
+        <button className="logout-button" onClick={() => {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+          navigate('/login');
+        }}>Logout</button>
       </div>
+      <div className="upload-container">
+        <div className="upload-header">
+          <h2>Upload Photos</h2>
+          <p>Drag & drop images, or upload a .zip file to get started.</p>
+          <button className="back-btn" onClick={() => navigate('/dashboard')}>Back to Dashboard</button>
+        </div>
 
       <div 
         className={`drop-zone ${dragActive ? 'active' : ''}`}
@@ -193,6 +206,7 @@ const UploadPage = () => {
       </button>
 
     </div>
+  </div>
   );
 };
 

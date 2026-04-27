@@ -27,7 +27,7 @@ export default function Landing() {
         <nav className="nav-links">
           <button 
             onClick={toggleTheme} 
-            className="theme-toggle"
+            className="theme-toggle landing-theme-toggle"
             title={theme === 'light' ? "Switch to Night Mode" : "Switch to Light Mode"}
           >
             {theme === 'light' ? (

@@ -36,13 +36,6 @@ export default function Dashboard() {
   return (
     <div className={`dashboard-container ${theme}`}>
       <div className="top-bar">
-        <button onClick={toggleTheme} className="dashboard-theme-toggle" title={theme === 'light' ? 'Switch to Night Mode' : 'Switch to Light Mode'}>
-          {theme === 'light' ? (
-            <img src="https://img.icons8.com/ios-filled/24/1a2b4c/moon-symbol.png" alt="Moon icon" />
-          ) : (
-            <img src="https://img.icons8.com/ios-filled/24/ffffff/sun--v1.png" alt="Sun icon" />
-          )}
-        </button>
         <button onClick={handleLogout} className="logout-button">Logout</button>
       </div>
       <div className="dashboard-content">

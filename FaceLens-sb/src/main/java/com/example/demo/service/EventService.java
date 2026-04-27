@@ -21,11 +21,12 @@ public class EventService {
         Event event = new Event();
         event.setName(createEventRequest.getName());
         event.setPassword(passwordEncoder.encode(createEventRequest.getPassword()));
+        event.setDescription(createEventRequest.getDescription());
         return eventRepository.save(event);
     }
 
     public Event login(String name, String password) {
-        Event event = eventRepository.findByName(name)
+        Event event = eventRepository.findTopByNameOrderByIdDesc(name)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
 
         if (!passwordEncoder.matches(password, event.getPassword())) {

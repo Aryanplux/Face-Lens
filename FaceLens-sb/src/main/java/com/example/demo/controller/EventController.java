@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +35,7 @@ public class EventController {
     }
 
     @PostMapping("/login")
+    @org.springframework.transaction.annotation.Transactional
     public ResponseEntity<?> loginToEvent(@RequestBody EventLoginRequest eventLoginRequest) {
         Event event = eventService.login(eventLoginRequest.getName(), eventLoginRequest.getPassword());
 
@@ -43,12 +46,19 @@ public class EventController {
                         .toUriString())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new EventResponse(event.getId(), event.getName(), photoUrls));
+        Date lastUpdated = event.getPhotos().stream()
+                .map(Photo::getUploadedAt)
+                .filter(date -> date != null)
+                .max(Date::compareTo)
+                .orElse(null);
+
+        return ResponseEntity.ok(new EventResponse(event.getId(), event.getName(), event.getDescription(), photoUrls, lastUpdated));
     }
 
     @GetMapping("/{eventName}")
+    @org.springframework.transaction.annotation.Transactional
     public ResponseEntity<?> getEvent(@PathVariable String eventName) {
-        Event event = eventRepository.findByName(eventName)
+        Event event = eventRepository.findTopByNameOrderByIdDesc(eventName)
                 .orElseThrow(() -> new RuntimeException("Event not found"));
 
         List<String> photoUrls = event.getPhotos().stream()
@@ -58,6 +68,12 @@ public class EventController {
                         .toUriString())
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(new EventResponse(event.getId(), event.getName(), photoUrls));
+        Date lastUpdated = event.getPhotos().stream()
+                .map(Photo::getUploadedAt)
+                .filter(date -> date != null)
+                .max(Date::compareTo)
+                .orElse(null);
+
+        return ResponseEntity.ok(new EventResponse(event.getId(), event.getName(), event.getDescription(), photoUrls, lastUpdated));
     }
 }

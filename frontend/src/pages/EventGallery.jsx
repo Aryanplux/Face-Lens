@@ -4,7 +4,7 @@ import '../styles/EventGallery.css';
 
 const EventGallery = () => {
     const { eventName } = useParams();
-    const [photos, setPhotos] = useState([]);
+    const [eventData, setEventData] = useState({ description: '', photos: [], lastUpdated: null });
     const [theme, setTheme] = useState('light');
 
     useEffect(() => {
@@ -12,21 +12,32 @@ const EventGallery = () => {
         setTheme(savedTheme);
         document.documentElement.setAttribute('data-theme', savedTheme);
 
-        // Fetch photos for the event
-        // Replace with your actual API call
-        const fetchPhotos = async () => {
-            console.log(`Fetching photos for event: ${eventName}`);
-            // Mock data
-            const mockPhotos = [
-                { id: 1, url: 'https://via.placeholder.com/300' },
-                { id: 2, url: 'https://via.placeholder.com/300' },
-                { id: 3, url: 'https://via.placeholder.com/300' },
-                { id: 4, url: 'https://via.placeholder.com/300' },
-            ];
-            setPhotos(mockPhotos);
+        const fetchEventData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const headers = {};
+                // if (token) headers['Authorization'] = `Bearer ${token}`;
+
+                console.log(`Fetching event data for ${eventName}...`);
+                const response = await fetch(`http://localhost:9090/api/events/${eventName}`, { headers });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log("Event Data fetched:", data);
+                    setEventData({
+                        description: data.description,
+                        photos: data.photoUrls || [],
+                        lastUpdated: data.lastUpdated
+                    });
+                } else {
+                    console.error("Failed to fetch event data. Status:", response.status);
+                }
+            } catch (error) {
+                console.error("Failed to fetch event data", error);
+            }
         };
 
-        fetchPhotos();
+        fetchEventData();
     }, [eventName]);
 
     const toggleTheme = () => {
@@ -36,25 +47,40 @@ const EventGallery = () => {
         document.documentElement.setAttribute('data-theme', newTheme);
     };
 
+    const getLastUpdatedStr = () => {
+        const localTime = localStorage.getItem('lastUploadTime');
+        const timeToUse = localTime || eventData.lastUpdated;
+        if (!timeToUse) return 'Never';
+        return new Date(timeToUse).toLocaleString(undefined, {
+            dateStyle: 'medium',
+            timeStyle: 'short'
+        });
+    };
+
     return (
         <div className={`event-gallery-container ${theme}`}>
-            <button className="theme-toggle" onClick={toggleTheme}>
-                {theme === 'light' ? (
-                  <img src="https://img.icons8.com/ios-filled/24/1a2b4c/moon-symbol.png" alt="Moon icon" />
-                ) : (
-                  <img src="https://img.icons8.com/ios-filled/24/ffffff/sun--v1.png" alt="Sun icon" />
-                )}
-            </button>
-            <header className="event-gallery-header">
-                <h1>{eventName}</h1>
-            </header>
-            <div className="photo-grid">
-                {photos.map(photo => (
-                    <div key={photo.id} className="photo-item">
-                        <img src={photo.url} alt={`Photo ${photo.id}`} />
-                        <a href={photo.url} download className="download-button">Download</a>
+            <div className="event-gallery-hero">
+                <h1 className="event-title">{eventName}</h1>
+                <p className="event-description">
+                    {eventData.description || "No description provided for this event."}
+                </p>
+                <div className="event-big-stats">
+                    <div className="stat-card">
+                        <span className="stat-value">{getLastUpdatedStr()}</span>
+                        <span className="stat-label">Last Updated</span>
                     </div>
-                ))}
+                </div>
+                
+                <button 
+                  className="search-face-btn" 
+                  onClick={() => alert('Starting OpenCV python face scanner...')}
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="btn-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4h6m-6 4h6m-6 4h6M4 4h6m-6 4h6m-6 4h6M4 16h16M4 20h16" />
+                    </svg>
+                    Search your photos
+                </button>
+                <p className="search-hint">Our AI will scan your face and securely find all your photos.</p>
             </div>
         </div>
     );

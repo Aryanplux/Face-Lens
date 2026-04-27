@@ -222,3 +222,21 @@
   cursor: not-allowed;
   box-shadow: none;
 }
+
+.upload-page-wrapper {
+  min-height: 100vh;
+  padding: 60px 20px;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+[data-theme='dark'] .upload-page-wrapper {
+  background-color: #000c1a;
+  color: #ffffff;
+}
+
+

@@ -12,6 +12,9 @@ public class Event {
 
     private String name;
     private String password;
+    
+    @Column(length = 1000)
+    private String description;
 
     @OneToMany(mappedBy = "event")
     private List<Photo> photos;
@@ -40,6 +43,14 @@ public class Event {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Photo> getPhotos() {

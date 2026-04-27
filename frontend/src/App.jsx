@@ -7,6 +7,8 @@ import Landing from './pages/Landing';
 import CreateEvent from './pages/CreateEvent';
 import EventLogin from './pages/EventLogin';
 import EventGallery from './pages/EventGallery';
+import GlobalLogo from './components/GlobalLogo';
+import GlobalThemeToggle from './components/GlobalThemeToggle';
 import './App.css';
 import './index.css';
 
@@ -18,6 +20,8 @@ function App() {
 
   return (
     <Router>
+      <GlobalLogo />
+      <GlobalThemeToggle />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

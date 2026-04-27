@@ -100,3 +100,40 @@
 .auth-link a:hover {
   text-decoration: underline;
 }
+
+[data-theme='dark'] .auth-container {
+  background: #000c1a;
+}
+
+[data-theme='dark'] .auth-card {
+  background: #00152e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+
+[data-theme='dark'] .auth-card h2 {
+  color: #fff;
+}
+
+[data-theme='dark'] .form-group label {
+  color: #a0aec0;
+}
+
+[data-theme='dark'] .form-group input {
+  background-color: #001a35;
+  border-color: #002b5e;
+  color: #fff;
+}
+
+[data-theme='dark'] .form-group input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.25);
+}
+
+[data-theme='dark'] .auth-link {
+  color: #a0aec0;
+}
+
+[data-theme='dark'] .auth-link a {
+  color: #667eea;
+}
