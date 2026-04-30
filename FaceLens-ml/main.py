@@ -34,13 +34,23 @@ async def detect_faces(file: UploadFile = File(...)):
         
         results = []
         for (top, right, bottom, left), encoding in zip(face_locations, face_encodings):
+            # Crop the detected face
+            face_image = image_np[top:bottom, left:right]
+            pil_face = Image.fromarray(face_image)
+            
+            # Convert cropped face to base64
+            buffered = io.BytesIO()
+            pil_face.save(buffered, format="JPEG")
+            cropped_face_b64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
+
             # Encode embedding as base64 string
             encoding_bytes = encoding.tobytes()
             encoding_b64 = base64.b64encode(encoding_bytes).decode('utf-8')
             
             results.append({
                 "bounding_box": {"y": top, "x": left, "h": bottom - top, "w": right - left}, # y, x, h, w
-                "embedding": encoding_b64
+                "embedding": encoding_b64,
+                "cropped_face_image": cropped_face_b64
             })
             
         return {"faces": results}
@@ -89,13 +99,15 @@ def bulk_compare_faces(req: BulkCompareRequest):
             gallery_embs.append(g_emb)
             
         if not gallery_embs:
-            return {"matches": []}
+            return {"matches": [], "closest_match_distance": None}
             
         distances = face_recognition.face_distance(gallery_embs, target_emb)
         
+        closest_distance = float(np.min(distances)) if distances.any() else None
+
         results = []
         for i, distance in enumerate(distances):
-            is_match = distance < 0.55 # Using a slightly stricter threshold to avoid false positives
+            is_match = distance < 0.6 # Typical match threshold
             similarity = 1.0 - distance
             results.append({
                 "index": i,
@@ -104,7 +116,7 @@ def bulk_compare_faces(req: BulkCompareRequest):
                 "similarity": float(similarity) # Convert distance to similarity
             })
             
-        return {"matches": results}
+        return {"matches": results, "closest_match_distance": closest_distance}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
