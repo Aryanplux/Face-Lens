@@ -48,13 +48,14 @@ public class MlService {
 
         ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
         if (response.getStatusCode().is2xxSuccessful()) {
+            System.out.println("Detect Face ML Response (truncated): " + response.getBody().substring(0, Math.min(200, response.getBody().length())) + "...");
             return response.getBody(); // Returns the JSON string containing face arrays
         } else {
             throw new IOException("Failed to detect faces: " + response.getStatusCode());
         }
     }
 
-    public List<Integer> bulkCompare(String targetEmbeddingBase64, List<String> galleryEmbeddings) throws IOException {
+    public Map<String, Object> bulkCompareWithDetails(String targetEmbeddingBase64, List<String> galleryEmbeddings) throws IOException {
         String url = mlServiceUrl + "/bulk_compare";
 
         Map<String, Object> requestMap = new HashMap<>();
@@ -68,6 +69,7 @@ public class MlService {
 
         ResponseEntity<String> response = restTemplate.postForEntity(url, requestEntity, String.class);
         if (response.getStatusCode().is2xxSuccessful()) {
+            System.out.println("Bulk Compare ML Response: " + response.getBody());
             try {
                 JsonNode root = objectMapper.readTree(response.getBody());
                 JsonNode matches = root.get("matches");
@@ -79,12 +81,20 @@ public class MlService {
                         }
                     }
                 }
-                return matchedIndices;
+                
+                Map<String, Object> result = new HashMap<>();
+                result.put("indices", matchedIndices);
+                result.put("closest_match_distance", root.has("closest_match_distance") && !root.get("closest_match_distance").isNull() ? root.get("closest_match_distance").asDouble() : null);
+                return result;
             } catch (JsonProcessingException e) {
                 throw new IOException("Failed to parse ML response", e);
             }
         } else {
             throw new IOException("Failed to compare faces: " + response.getStatusCode());
         }
+    }
+
+    public List<Integer> bulkCompare(String targetEmbeddingBase64, List<String> galleryEmbeddings) throws IOException {
+        return (List<Integer>) bulkCompareWithDetails(targetEmbeddingBase64, galleryEmbeddings).get("indices");
     }
 }

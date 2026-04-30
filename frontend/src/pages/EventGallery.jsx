@@ -71,14 +71,37 @@ const EventGallery = () => {
             });
             
             if (response.ok) {
-                const matchedPhotos = await response.json();
+                const result = await response.json();
+                
+                let matchedPhotos = [];
+                let closestDistance = null;
+                
+                // Handle the new response format with distances
+                if (result && typeof result === 'object' && result.matchedPhotos !== undefined) {
+                    matchedPhotos = result.matchedPhotos;
+                    closestDistance = result.closest_match_distance;
+                } else if (Array.isArray(result)) {
+                    // Fallback for old API format
+                    matchedPhotos = result;
+                }
+                
+                console.log(`[Face Search Diagnostics] Closest Match Distance: ${closestDistance}`);
+
                 setDisplayedPhotos(matchedPhotos);
                 setHasSearched(true);
                 if (matchedPhotos.length === 0) {
-                    alert("No matching photos found.");
+                    alert(`No matching photos found.\nClosest Match Distance: ${closestDistance}`);
                 }
             } else {
-                alert("Failed to search photos. Try again.");
+                const contentType = response.headers.get("content-type");
+                let errorData = "Try again.";
+                if (contentType && contentType.includes("application/json")) {
+                    const errorJson = await response.json();
+                    errorData = errorJson.message || JSON.stringify(errorJson);
+                } else {
+                    errorData = await response.text();
+                }
+                alert(`Failed to search photos. Server says: ${errorData}`);
             }
         } catch (err) {
             console.error(err);
@@ -206,9 +229,9 @@ const EventGallery = () => {
                 <div className="photo-grid">
                     {displayedPhotos.map((photo, index) => (
                         <div key={index} className="photo-card">
-                            <img src={`http://localhost:9090${photo.thumbnailPath || photo.filePath}`} alt={photo.filename} loading="lazy" />
+                            <img src={`http://localhost:9090/uploads/${photo.thumbnailPath || photo.filePath}`} alt={photo.filename} loading="lazy" />
                             <div className="photo-actions">
-                                <a href={`http://localhost:9090${photo.filePath}`} download className="download-btn">
+                                <a href={`http://localhost:9090/uploads/${photo.filePath}`} download className="download-btn">
                                     Download
                                 </a>
                             </div>

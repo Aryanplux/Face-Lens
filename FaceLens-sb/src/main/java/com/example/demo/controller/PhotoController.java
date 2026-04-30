@@ -25,6 +25,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -266,6 +268,7 @@ public class PhotoController {
             
             // 2. Fetch all photos for this event that have faceData
             List<Photo> eventPhotos = photoRepository.findByEventId(eventId);
+            System.out.println("[DIAGNOSTICS] Found " + eventPhotos.size() + " total photos for eventId " + eventId);
             
             List<String> galleryEmbeddings = new ArrayList<>();
             List<Photo> galleryPhotos = new ArrayList<>(); // Keep track of which embedding belongs to which photo
@@ -283,15 +286,23 @@ public class PhotoController {
                         }
                     } catch (Exception e) {// ignore parsing error for individual photo
                     } 
+                } else {
+                    System.out.println("[DIAGNOSTICS] Photo ID " + photo.getId() + " has null faceData");
                 }
             }
             
+            System.out.println("[DIAGNOSTICS] Total gallery embeddings extracted: " + galleryEmbeddings.size());
+            
             if (galleryEmbeddings.isEmpty()) {
-                return ResponseEntity.ok(new ArrayList<>());
+                Map<String, Object> emptyResp = new HashMap<>();
+                emptyResp.put("matchedPhotos", new ArrayList<>());
+                emptyResp.put("closest_match_distance", null);
+                return ResponseEntity.ok(emptyResp);
             }
             
             // 3. Call ML service to bulk compare
-            List<Integer> matchIndices = mlService.bulkCompare(targetEmbedding, galleryEmbeddings);
+            Map<String, Object> compareDetails = mlService.bulkCompareWithDetails(targetEmbedding, galleryEmbeddings);
+            List<Integer> matchIndices = (List<Integer>) compareDetails.get("indices");
             
             // 4. Map match indices back to Photos (and eliminate duplicates if a photo had multiple matching faces somehow, though unlikely)
             List<Photo> matchedPhotos = new ArrayList<>();
@@ -302,7 +313,11 @@ public class PhotoController {
                 }
             }
             
-            return ResponseEntity.ok(matchedPhotos);
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("matchedPhotos", matchedPhotos);
+            responseBody.put("closest_match_distance", compareDetails.get("closest_match_distance"));
+            
+            return ResponseEntity.ok(responseBody);
             
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

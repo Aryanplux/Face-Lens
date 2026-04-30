@@ -29,7 +29,7 @@ public class Photo {
 
     private String description;
 
-    @Column(name = "face_data")
+    @Column(name = "face_data", columnDefinition = "TEXT")
     private String faceData; // JSON string containing face detection data
 
     private String status;
