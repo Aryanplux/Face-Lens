@@ -6,7 +6,7 @@
 \usepackage{graphicx}
 \usepackage{hyperref}
 \usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows, positioning, fit, calc, decorations.pathreplacing, shapes.multipart}
+\usetikzlibrary{shapes.geometric, arrows, positioning, fit, calc, decorations.pathreplacing, shapes.multipart, backgrounds, arrows.meta}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepackage{listings}
@@ -31,9 +31,66 @@
 \definecolor{storagecolor}{RGB}{200,200,200}
 \definecolor{arrowcolor}{RGB}{100,100,100}
 
+% Sequence Diagram Colours
+\definecolor{clrUser}{HTML}{185FA5}   % Blue   � User Browser
+\definecolor{clrBack}{HTML}{0F6E56}   % Teal   � Backend API
+\definecolor{clrML}  {HTML}{534AB7}   % Purple � ML Service
+\definecolor{clrDB}  {HTML}{BA7517}   % Amber  � Database
+\definecolor{clrSync}{HTML}{1565C0}   % Solid call arrow
+\definecolor{clrRet} {HTML}{0F6E56}   % Dashed return arrow
+\definecolor{clrAsyn}{HTML}{9E6300}   % Dashed async/DB arrow
+\definecolor{clrSelf}{HTML}{5F5E5A}   % Self-message arrow
+\definecolor{clrStep}{HTML}{444441}   % Step-number circle
+
+% -- TikZ style definitions -----------------------------------
+\tikzset{
+  % Participant header boxes
+  actor/.style 2 args={
+    rectangle, rounded corners=4pt,
+    draw=#1!65, fill=#1!10,
+    minimum width=2.9cm, minimum height=1.05cm,
+    align=center, font=\small\bfseries, text=#1!80!black,
+    inner sep=4pt,
+  },
+  % Dashed vertical lifeline
+  lifeline/.style={
+    draw=gray!35, dashed, line width=0.55pt,
+  },
+  % Synchronous call: solid, blue
+  sync/.style={
+    -{Stealth[length=5pt, width=4.5pt]},
+    draw=clrSync, line width=1.3pt,
+    rounded corners=2pt,
+  },
+  % Return message: dashed, teal
+  ret/.style={
+    dashed, -{Stealth[length=5pt, width=4.5pt]},
+    draw=clrRet, line width=1.1pt,
+  },
+  % Async / DB call: dash-dotted, amber
+  asyn/.style={
+    dashdotted, -{Stealth[length=5pt, width=4.5pt]},
+    draw=clrAsyn, line width=1.1pt,
+  },
+  % Activation box (active processing time)
+  act/.style 2 args={
+    fill=#1!20, draw=#1!80, line width=0.6pt,
+    minimum width=6pt, anchor=north,
+    minimum height=#2,
+  },
+  % Message text labels
+  lbl/.style={
+    font=\scriptsize, align=center,
+  },
+  % Self-message label
+  lblself/.style={
+    font=\scriptsize, align=left,
+  }
+}
+
 \title{\Huge\textbf{FaceLens Project}\\ \Large Comprehensive Architecture, Implementation \& Analysis}
 \author{Engineering Team}
-\date{\today}
+\date{\today \\ \vspace{0.5cm} \large \href{https://github.com/Aryanplux/Face-Lens}{GitHub Repository: FaceLens}}
 
 \begin{document}
 
@@ -61,7 +118,7 @@ The platform is built on a three‑tier architecture:
     \item \textbf{Spring Boot backend} – a REST API that manages events, user sessions, photo metadata, and orchestrates ML calls.
     \item \textbf{FastAPI ML microservice} – a dedicated server for face detection, embedding extraction, and vector comparison.
 \end{itemize}
-Data is persisted in a relational database (MySQL/PostgreSQL) and a file storage layer for uploaded images. The entire system can be containerised with Docker and deployed on cloud infrastructure.
+Data is persisted in a relational database (H2 Database) and a file storage layer for uploaded images. The entire system can be containerised with Docker and deployed on cloud infrastructure.
 
 \subsection{Market Analysis and Problem Statement}
 Event photography is a multi‑billion‑dollar industry, yet the post‑event photo distribution remains inefficient. A 2023 survey of event organisers revealed that over 68\% of attendees never see more than 10\% of their event photos, simply because manual browsing is too time‑consuming. Simultaneously, photographers capture an average of 500–1500 images per event, making it impossible to manually tag and distribute photos to individuals.
@@ -120,10 +177,10 @@ The architecture integrates three primary nodes: the React Frontend, the Spring 
     arrow/.style={thick,->,>=stealth}
 ]
 
-\node (frontend) [box, fill=frontcolor] {\textbf{React Frontend} \\ (Vite, TypeScript)};
-\node (backend) [box, fill=backcolor, below=of frontend] {\textbf{Spring Boot Backend} \\ (Java 17, REST)};
+\node (frontend) [box, fill=frontcolor] {\textbf{React Frontend} \\ (Vite, JavaScript)};
+\node (backend) [box, fill=backcolor, below=of frontend] {\textbf{Spring Boot Backend} \\ (Java 21, REST)};
 \node (ml) [box, fill=mlcolor, right=of backend, xshift=2cm] {\textbf{FastAPI ML Service} \\ (Python, face\_recognition)};
-\node (database) [db, fill=dbcolor, below=of backend] {\textbf{Relational DB} \\ (MySQL/PostgreSQL)};
+\node (database) [db, fill=dbcolor, below=of backend] {\textbf{Relational DB} \\ (H2 Database)};
 \node (storage) [db, fill=storagecolor, below=of ml] {\textbf{File Storage} \\ (Disk / S3)};
 
 \draw [arrow] (frontend) -- node[anchor=east] {HTTP / JSON} (backend);
@@ -147,40 +204,260 @@ The architecture integrates three primary nodes: the React Frontend, the Spring 
 \subsection{Data Flow Architecture – Selfie Matching Sequence}
 The most critical data flow is the selfie‑matching action. The following sequence diagram details every step from camera capture to displaying results.
 
+ 
+% ── Colour palette ────────────────────────────────────────────
+\definecolor{clrUser}{HTML}{185FA5}   % Blue   – User Browser
+\definecolor{clrBack}{HTML}{0F6E56}   % Teal   – Backend API
+\definecolor{clrML}  {HTML}{534AB7}   % Purple – ML Service
+\definecolor{clrDB}  {HTML}{BA7517}   % Amber  – Database
+\definecolor{clrSync}{HTML}{1565C0}   % Solid call arrow
+\definecolor{clrRet} {HTML}{0F6E56}   % Dashed return arrow
+\definecolor{clrAsyn}{HTML}{9E6300}   % Dashed async/DB arrow
+\definecolor{clrSelf}{HTML}{5F5E5A}   % Self-message arrow
+\definecolor{clrStep}{HTML}{444441}   % Step-number circle
+ 
+% ── TikZ style definitions ───────────────────────────────────
+\tikzset{
+  % Participant header boxes
+  actor/.style 2 args={
+    rectangle, rounded corners=4pt,
+    draw=#1!65, fill=#1!10,
+    minimum width=2.9cm, minimum height=1.05cm,
+    align=center, font=\small\bfseries, text=#1!80!black,
+    inner sep=4pt,
+  },
+  % Dashed vertical lifeline
+  lifeline/.style={
+    draw=gray!35, dashed, line width=0.55pt,
+  },
+  % Synchronous call: solid, blue
+  sync/.style={
+    -{Stealth[length=5pt, width=4.5pt]},
+    draw=clrSync, line width=1.3pt,
+  },
+  % Return message: dashed, teal
+  ret/.style={
+    -{Stealth[length=5pt, width=4.5pt]},
+    draw=clrRet, line width=1.2pt, dashed,
+  },
+  % Async / DB query: dashed, amber
+  asyncq/.style={
+    -{Stealth[length=5pt, width=4.5pt]},
+    draw=clrAsyn, line width=1.2pt, dashed,
+  },
+  % Self-message loop
+  self/.style={
+    -{Stealth[length=4pt, width=3.5pt]},
+    draw=clrSelf, line width=1pt,
+  },
+  % Message label (sits above the arrow line)
+  lbl/.style={
+    above, font=\scriptsize, inner sep=2pt,
+  },
+  % Step-number badge (left margin)
+  stepbadge/.style={
+    circle, fill=clrStep!15, draw=clrStep!40,
+    minimum size=14pt, inner sep=0pt,
+    font=\tiny\bfseries, text=clrStep,
+  },
+  % UML fragment frame
+  fragframe/.style={
+    rectangle, rounded corners=4pt,
+    draw=gray!40, dashed, line width=0.5pt,
+    fill=gray!4,
+  },
+}
+ 
+% ── Helpers ──────────────────────────────────────────────────
+%  \actbox{color}{x-centre}{y-top}{y-bottom}
+\newcommand{\actbox}[4]{%
+  \filldraw[fill=#1!12, draw=#1!55, line width=0.55pt, rounded corners=2pt]
+    (#2-0.14, #3) rectangle (#2+0.14, #4);%
+}
+ 
+% ── Document body ─────────────────────────────────────────────
+ 
+\subsection*{Data Flow Architecture – Selfie Matching Sequence}
+ 
+The selfie‑matching action is the most latency‑sensitive path in the system.
+The diagram below maps every message exchanged — from the moment the user
+opens the event page to the moment matched photo URLs are returned.
+ 
+\smallskip
+\noindent
+\textbf{Arrow key:}\ solid = synchronous call;\enspace
+dashed \textcolor{clrRet}{teal} = return / response;\enspace
+dashed \textcolor{clrAsyn}{amber} = async DB query.
+Activation boxes indicate when each service is actively processing.
+ 
+\vspace{0.8cm}
 \begin{center}
-\begin{tikzpicture}[
-    lifeline/.style={dashed, draw=gray},
-    message/.style={->, >=stealth, thick},
-    node distance=1.5cm and 3cm,
-    box/.style={rectangle, draw, minimum width=2.5cm, minimum height=0.8cm, align=center, font=\small}
-]
-
-% Actors
-\node[box, fill=frontcolor] (user) {User Browser};
-\node[box, fill=backcolor, right=of user] (backend) {Backend};
-\node[box, fill=mlcolor, right=of backend] (ml) {ML Service};
-\node[box, fill=dbcolor, below=of backend] (db) {Database};
-
-% Lifelines
-\draw[lifeline] (user.south) -- ++(0,-9cm);
-\draw[lifeline] (backend.south) -- ++(0,-9cm);
-\draw[lifeline] (ml.south) -- ++(0,-9cm);
-\draw[lifeline] (db.south) -- ++(0,-9cm);
-
-% Messages
-\draw[message] (user) -- node[above, font=\footnotesize] {1. Open event page} (backend);
-\draw[message] (backend) -- (user) node[above, font=\footnotesize, xshift=-1.5cm] {2. Return event info + camera prompt};
-\draw[message] (user) -- (user |- 0,-2.5cm) node[right, font=\footnotesize, xshift=0.5cm] {3. User grants camera access};
-\draw[message] (user) -- (backend |- 0,-3.5cm) node[above, font=\footnotesize] {4. POST /match-selfie (image blob)};
-\draw[message] (backend) -- (ml |- 0,-4.5cm) node[above, font=\footnotesize] {5. POST /detect (file)};
-\draw[message] (ml) -- (backend |- 0,-5.5cm) node[above, font=\footnotesize] {6. response: face locations + embeddings};
-\draw[message, dashed] (backend) -- (db |- 0,-6.5cm) node[above, font=\footnotesize] {7. Fetch stored embeddings for event};
-\draw[message] (backend) -- (ml |- 0,-7.5cm) node[above, font=\footnotesize] {8. POST /bulk\_compare};
-\draw[message] (ml) -- (backend |- 0,-8.5cm) node[above, font=\footnotesize] {9. Return matches with distances};
-\draw[message] (backend) -- (user |- 0,-9.5cm) node[above, font=\footnotesize] {10. Send matched photo URLs};
-
+\begin{tikzpicture}[x=1cm, y=1cm]
+ 
+%% ── Column x-positions (cm) ─────────────────────────────────
+\def\xU{0}       % User Browser
+\def\xB{4.6}     % Backend API
+\def\xM{9.2}     % ML Service
+\def\xD{13.8}    % Database
+ 
+%% ── Row y-positions (downward = negative) ───────────────────
+\def\rA{-1.3}    % 1 – Open event page
+\def\rB{-2.3}    % 2 – Event info return
+\def\rC{-3.3}    % 3 – Camera self-loop (top)
+\def\rCb{-4.0}   %     Camera self-loop (bottom)
+\def\rD{-5.0}    % 4 – POST /match-selfie
+\def\rE{-6.1}    % 5 – POST /detect
+\def\rF{-7.1}    % 6 – embeddings return
+\def\rG{-8.3}    % 7 – Fetch embeddings (DB)
+\def\rH{-9.3}    % 8 – DB return
+\def\rI{-10.5}   % 9 – POST /bulk_compare
+\def\rJ{-11.5}   % 10 – Matches return
+\def\rK{-12.7}   % 11 – Final photo URLs
+ 
+%% ── PARTICIPANT BOXES ───────────────────────────────────────
+\node[actor={clrUser}{}] (user) at (\xU, 0) {User\\Browser};
+\node[actor={clrBack}{}] (back) at (\xB, 0) {Backend\\API};
+\node[actor={clrML}{}] (ml)   at (\xM, 0) {ML\\Service};
+\node[actor={clrDB}{}] (db)   at (\xD, 0) {Database};
+ 
+%% ── LIFELINES ───────────────────────────────────────────────
+\draw[lifeline] (\xU,-0.58) -- (\xU,-13.4);
+\draw[lifeline] (\xB,-0.58) -- (\xB,-13.4);
+\draw[lifeline] (\xM,-0.58) -- (\xM,-13.4);
+\draw[lifeline] (\xD,-0.58) -- (\xD,-13.4);
+ 
+%% ── ACTIVATION BOXES ────────────────────────────────────────
+% User: active during camera grant + selfie upload (rows C–D)
+\actbox{clrUser}{\xU}{\rC+0.12}{\rD-0.18}
+% Backend: orchestrates the entire flow (rows A–K)
+\actbox{clrBack}{\xB}{\rA+0.12}{\rK-0.18}
+% ML Service: two burst activations (detect & compare)
+\actbox{clrML}  {\xM}{\rE+0.12}{\rF-0.12}
+\actbox{clrML}  {\xM}{\rI+0.12}{\rJ-0.12}
+% Database: single query/response activation
+\actbox{clrDB}  {\xD}{\rG+0.12}{\rH-0.12}
+ 
+%% ── UML FRAGMENT: Matching Pipeline ─────────────────────────
+\begin{scope}[on background layer]
+  \node[fragframe,
+        fit={(\xB-0.75,\rE+0.48)(\xD+0.75,\rJ-0.48)}]
+        (mpf) {};
+\end{scope}
+% Pentagon-style label tab at top-left of fragment
+\fill[gray!10] (\xB-0.75,\rE+0.48) rectangle (\xB+1.05,\rE+0.15);
+\draw[gray!40, line width=0.5pt]
+  (\xB-0.75,\rE+0.48) -- (\xB+1.05,\rE+0.48) --
+  (\xB+1.05,\rE+0.15) -- (\xB-0.75,\rE+0.15);
+\node[font=\tiny\bfseries, text=gray!65, anchor=west]
+  at (\xB-0.7,\rE+0.32) {Matching Pipeline};
+ 
+%% ── MESSAGES ────────────────────────────────────────────────
+ 
+% ① Open event page
+\draw[sync] (\xU,\rA) -- (\xB,\rA)
+  node[lbl, midway] {\texttt{GET /event/:id}};
+\node[stepbadge] at (-0.75,\rA) {1};
+ 
+% ② Return event info + camera prompt
+\draw[ret] (\xB,\rB) -- (\xU,\rB)
+  node[lbl, midway] {Event info + camera prompt};
+\node[stepbadge] at (-0.75,\rB) {2};
+ 
+% ③ Self-loop – user grants camera access
+\draw[self] (\xU,\rC)
+  -- ++( 0.9, 0)
+  -- ++(   0, \rCb-\rC)
+  -- ++(-0.9, 0);
+\node[font=\scriptsize, anchor=west, text=clrSelf]
+  at (\xU+0.95, {(\rC+\rCb)/2}) {Camera access granted};
+\node[stepbadge] at (-0.75,{(\rC+\rCb)/2}) {3};
+ 
+% ④ POST /match-selfie (image blob)
+\draw[sync] (\xU,\rD) -- (\xB,\rD)
+  node[lbl, midway]
+  {\texttt{POST /match-selfie}\ \ {\scriptsize (image blob)}};
+\node[stepbadge] at (-0.75,\rD) {4};
+ 
+% ⑤ POST /detect – face detection
+\draw[sync] (\xB,\rE) -- (\xM,\rE)
+  node[lbl, midway] {\texttt{POST /detect}\ \ {\scriptsize (file)}};
+\node[stepbadge] at (-0.75,\rE) {5};
+ 
+% ⑥ Response – face locations + embeddings
+\draw[ret] (\xM,\rF) -- (\xB,\rF)
+  node[lbl, midway] {Face locations + embeddings};
+\node[stepbadge] at (-0.75,\rF) {6};
+ 
+% ⑦ Async DB query – fetch stored embeddings
+\draw[asyncq] (\xB,\rG) -- (\xD,\rG)
+  node[lbl, midway] {\texttt{SELECT} stored embeddings for event};
+\node[stepbadge] at (-0.75,\rG) {7};
+ 
+% ⑧ DB return – stored embeddings
+\draw[ret] (\xD,\rH) -- (\xB,\rH)
+  node[lbl, midway] {Stored embeddings (n vectors)};
+% DB round-trip brace
+\draw[decorate,
+      decoration={brace, amplitude=4pt, mirror},
+      gray!40, line width=0.4pt]
+  (\xD+0.55,\rG) -- (\xD+0.55,\rH)
+  node[midway, right=5pt, font=\tiny, text=gray!55] {DB round-trip};
+\node[stepbadge] at (-0.75,\rH) {8};
+ 
+% ⑨ POST /bulk_compare – cosine similarity search
+\draw[sync] (\xB,\rI) -- (\xM,\rI)
+  node[lbl, midway] {\texttt{POST /bulk\_compare}};
+\node[stepbadge] at (-0.75,\rI) {9};
+ 
+% ⑩ ML response – ranked matches
+\draw[ret] (\xM,\rJ) -- (\xB,\rJ)
+  node[lbl, midway] {Ranked matches with cosine distances};
+\node[stepbadge] at (-0.75,\rJ) {10};
+ 
+% ⑪ Final response – matched photo URLs
+\draw[ret] (\xB,\rK) -- (\xU,\rK)
+  node[lbl, midway] {Matched photo URLs + metadata};
+\node[stepbadge] at (-0.75,\rK) {11};
+ 
+%% ── LEGEND ──────────────────────────────────────────────────
+\begin{scope}[shift={(0,-14.1)}]
+  \node[font=\scriptsize\bfseries, text=gray!60, anchor=west]
+    at (-0.75, 0) {Legend};
+  % Sync call
+  \draw[sync] (0, -0.5) -- (1.5, -0.5);
+  \node[font=\tiny, anchor=west] at (1.6,-0.5)
+    {Synchronous call};
+  % Return
+  \draw[ret]  (4.5,-0.5) -- (6.0,-0.5);
+  \node[font=\tiny, anchor=west] at (6.1,-0.5)
+    {Return / response};
+  % Async
+  \draw[asyncq](9.0,-0.5) -- (10.5,-0.5);
+  \node[font=\tiny, anchor=west] at (10.6,-0.5)
+    {Async DB query};
+  % Self
+  \draw[self] (0,-1.1) -- ++(0.5,0) -- ++(0,-0.35) -- ++(-0.5,0);
+  \node[font=\tiny, anchor=west] at (0.6,-1.28)
+    {Self-message};
+  % Activation box swatch
+  \filldraw[fill=clrBack!12, draw=clrBack!55, line width=0.4pt,
+            rounded corners=1pt]
+    (4.5,-1.28) rectangle (4.78,-1.0);
+  \node[font=\tiny, anchor=west] at (4.9,-1.14)
+    {Activation box (service is processing)};
+\end{scope}
+ 
 \end{tikzpicture}
 \end{center}
+ 
+\vspace{0.4cm}
+\noindent\textbf{Note on step 7:}\ The database fetch is performed
+asynchronously (fire-and-await). The backend suspends the request coroutine
+until the stored embeddings are returned (step~8), so no CPU is blocked.
+Steps 5--10 constitute the \emph{Matching Pipeline}: two round-trips to the
+ML service (face detection and bulk cosine comparison), bracketed by a single
+database read.
+ 
 
 All steps are stateless; the backend never stores the user’s selfie permanently. The matching is performed on‑the‑fly, preserving privacy.
 
@@ -317,7 +594,7 @@ The Spring Boot backend provides a secured REST API for event management and mat
 \node[layer] (controller) {Controller Layer \\ (EventController, SelfieController)};
 \node[layer, below=of controller] (service) {Service Layer \\ (EventService, FaceMatchService)};
 \node[layer, below=of service] (repository) {Repository Layer \\ (JPA Repositories)};
-\node[layer, below=of repository] (db) {Database (MySQL/PostgreSQL)};
+\node[layer, below=of repository] (db) {Database (H2 Database)};
 
 \node[sublayer, left=of service, xshift=-2.5cm, fill=mlcolor!30] (mlclient) {ML Client \\ (RestTemplate)};
 \node[sublayer, right=of service, xshift=2.5cm, fill=storagecolor!50] (storage) {File Storage \\ (Local/S3)};
@@ -340,8 +617,37 @@ The Spring Boot backend provides a secured REST API for event management and mat
 
 Security is implemented with JWT authentication. Admin users obtain a token after login and include it in the Authorization header. All endpoints are stateless.
 
+\subsection{Database Schema (Entity-Relationship Diagram)}
+The application relies on a structured relational data model to manage events, users, photos, and biometric embeddings. 
+
+\begin{center}
+\begin{tikzpicture}[
+    node distance=2.5cm,
+    entity/.style={rectangle split, rectangle split parts=2, draw, thick, fill=dbcolor!50, align=left, font=\small\ttfamily},
+    relation/.style={->, >=stealth, thick, gray}
+]
+
+\node[entity] (user) {\textbf{User (Admin)} \nodepart{two} id (PK) \\ username \\ password\_hash \\ role};
+\node[entity, right=of user, xshift=2cm] (event) {\textbf{Event} \nodepart{two} id (PK) \\ title \\ date \\ user\_id (FK)};
+\node[entity, below=of event, yshift=-1cm] (photo) {\textbf{Photo} \nodepart{two} id (PK) \\ event\_id (FK) \\ filename \\ path \\ upload\_time};
+\node[entity, left=of photo, xshift=-2cm] (face) {\textbf{FaceEmbedding} \nodepart{two} id (PK) \\ photo\_id (FK) \\ embedding (BLOB) \\ bounding\_box};
+
+\draw[relation] (user) -- node[above, text=black, font=\scriptsize] {1 : N} (event);
+\draw[relation] (event) -- node[right, text=black, font=\scriptsize] {1 : N} (photo);
+\draw[relation] (photo) -- node[above, text=black, font=\scriptsize] {1 : N} (face);
+
+\end{tikzpicture}
+\end{center}
+
+\begin{itemize}
+    \item \textbf{User}: Stores system administrators and event organisers who have access to create events.
+    \item \textbf{Event}: Contains metadata about the event such as the name, date, and description.
+    \item \textbf{Photo}: Represents a single uploaded image, linking back to the event it belongs to.
+    \item \textbf{FaceEmbedding}: Stores the extracted 128-dimensional face data enabling extremely fast query operations.
+\end{itemize}
+
 \subsection{Client-Side React Application}
-The frontend is a responsive React application built with Vite and TypeScript.
+The frontend is a responsive React application built with Vite and JavaScript.
 
 \begin{center}
 \begin{tikzpicture}[
@@ -524,4 +830,6 @@ GitHub Actions workflow runs unit tests, builds Docker images, and deploys to a 
 \subsection{Final Remarks}
 This document has provided a full‑stack view of the FaceLens platform, from business case to code‑level implementation. All architectural diagrams were generated with Ti\textit{k}Z and are embedded directly in the \LaTeX{} source. The project is ready for production deployment and has been validated through extensive testing and performance benchmarking.
 
+\ e n d { d o c u m e n t } 
+ 
 \end{document}
