@@ -5,25 +5,25 @@
 \contentsline {section}{\numberline {2}Comprehensive System Architecture}{5}{section.2}%
 \contentsline {subsection}{\numberline {2.1}High-Level Component Diagram}{5}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Data Flow Architecture – Selfie Matching Sequence}{6}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Performance Analytics and Metric Graphs}{8}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Machine Learning Processing Benchmarks}{8}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Model Accuracy vs. Threshold}{8}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Graph Analysis Interpretation}{9}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Implementation Details}{10}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Machine Learning Implementation}{10}{subsection.4.1}%
-\contentsline {subsubsection}{\numberline {4.1.1}ML Pipeline Overview}{10}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}API Design (ML Microservice)}{10}{subsubsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.2}Backend REST Implementation}{11}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Database Schema (Entity-Relationship Diagram)}{12}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Client-Side React Application}{12}{subsection.4.4}%
-\contentsline {section}{\numberline {5}Risk Management \& Evaluation}{14}{section.5}%
-\contentsline {section}{\numberline {6}Code Annex and Extensive Logs}{15}{section.6}%
-\contentsline {subsection}{\numberline {6.1}ML Microservice Core Logic}{15}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Backend REST Controller Example}{18}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Database Schema}{19}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}Extended Testing and Operational Logs}{19}{subsection.6.4}%
-\contentsline {subsubsection}{\numberline {6.4.1}Unit Test Coverage}{19}{subsubsection.6.4.1}%
-\contentsline {subsubsection}{\numberline {6.4.2}Load Test Results}{20}{subsubsection.6.4.2}%
-\contentsline {subsubsection}{\numberline {6.4.3}Operational Scenarios}{20}{subsubsection.6.4.3}%
-\contentsline {subsubsection}{\numberline {6.4.4}Continuous Integration}{20}{subsubsection.6.4.4}%
-\contentsline {subsection}{\numberline {6.5}Final Remarks}{21}{subsection.6.5}%
+\contentsline {section}{\numberline {3}Performance Analytics and Metric Graphs}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Machine Learning Processing Benchmarks}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Model Accuracy vs. Threshold}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Graph Analysis Interpretation}{8}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Implementation Details}{9}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Machine Learning Implementation}{9}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}ML Pipeline Overview}{9}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}API Design (ML Microservice)}{9}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Backend REST Implementation}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Database Schema (Entity-Relationship Diagram)}{11}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Client-Side React Application}{11}{subsection.4.4}%
+\contentsline {section}{\numberline {5}Risk Management \& Evaluation}{13}{section.5}%
+\contentsline {section}{\numberline {6}Code Annex and Extensive Logs}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}ML Microservice Core Logic}{14}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Backend REST Controller Example}{17}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Database Schema}{18}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Extended Testing and Operational Logs}{18}{subsection.6.4}%
+\contentsline {subsubsection}{\numberline {6.4.1}Unit Test Coverage}{18}{subsubsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.2}Load Test Results}{19}{subsubsection.6.4.2}%
+\contentsline {subsubsection}{\numberline {6.4.3}Operational Scenarios}{19}{subsubsection.6.4.3}%
+\contentsline {subsubsection}{\numberline {6.4.4}Continuous Integration}{19}{subsubsection.6.4.4}%
+\contentsline {subsection}{\numberline {6.5}Final Remarks}{20}{subsection.6.5}%
