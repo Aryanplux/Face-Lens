@@ -35,7 +35,7 @@
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 1. [Introduction](#-introduction)
 2. [Problem Statement & Solution](#-problem-statement--solution)
@@ -57,7 +57,7 @@
 
 ---
 
-## 🔭 Introduction
+##  Introduction
 
 **FaceLens** is a highly sophisticated, fully automated event photo sharing and distribution platform built from the ground up as a complete **full-stack microservices ecosystem**.
 
@@ -69,7 +69,7 @@ By leveraging **state-of-the-art Deep Learning facial recognition models**, Face
 
 ---
 
-## ⚡ Problem Statement & Solution
+##  Problem Statement & Solution
 
 ### The Problem — The Old Way is Broken
 
@@ -94,11 +94,11 @@ Photos never properly sorted or archived
 
 | Pain Point | Impact |
 |---|---|
-| 🕐 Manual curation by photographer | Days of wasted effort per event |
-| 🔍 Attendees scroll thousands of photos | Hours lost per person |
-| 🔓 Zero privacy enforcement | All guests see all photos |
-| 📂 No standardized workflow | Every event reinvents the process |
-| 📉 No scalability | Breaks entirely at large event sizes |
+|  Manual curation by photographer | Days of wasted effort per event |
+|  Attendees scroll thousands of photos | Hours lost per person |
+|  Zero privacy enforcement | All guests see all photos |
+|  No standardized workflow | Every event reinvents the process |
+|  No scalability | Breaks entirely at large event sizes |
 
 ### The Solution — FaceLens
 
@@ -121,7 +121,7 @@ Private, authenticated gallery instantly available per user ← minutes
 No one sees anyone else's photos. Ever.
 ```
 
-| ✅ FaceLens Feature | Result |
+|  FaceLens Feature | Result |
 |---|---|
 | Automated ML pipeline | Zero manual curation |
 | Reference selfie registration | One selfie = lifetime access to your photos |
@@ -131,7 +131,7 @@ No one sees anyone else's photos. Ever.
 
 ---
 
-## 🏗️ System Architecture
+##  System Architecture
 
 ### High-Level Architectural Overview
 
@@ -275,7 +275,7 @@ FaceLens-ml/
 
 ---
 
-## 🔄 End-to-End Data Flow
+##  End-to-End Data Flow
 
 The complete request lifecycle passes through **5 discrete pipeline phases**, each with a clearly defined responsibility boundary and failure domain.
 
@@ -285,32 +285,32 @@ The complete request lifecycle passes through **5 discrete pipeline phases**, ea
 └──────────────────────────────────────────────────────────────────────────────────────┘
 
   PHASE 1 ──────────────────────────────────────────────────────────────────────────────
-  📤  UPLOAD
+      UPLOAD
       React (multipart/form-data) ──HTTPS POST──► Spring Boot
       Spring Boot writes files to /uploads/<event_id>/photos/
       Metadata (filename, path, timestamp) logged to SQL
 
   PHASE 2 ──────────────────────────────────────────────────────────────────────────────
-  ⚙️  PROCESSING
+      PROCESSING
       Spring Boot service layer parallelizes storage I/O
       Constructs absolute file URI payload
       Internal HTTP call dispatched ──► Python ML Engine (localhost:5000)
 
   PHASE 3 ──────────────────────────────────────────────────────────────────────────────
-  🧠  AI INFERENCE
+      AI INFERENCE
       Python executes: detector.py → embedder.py → matcher.py
       Detected faces extracted → 128-D vectors generated
       Vectors compared against stored reference profiles
       Returns: { "matched_user_ids": [42, 107, 88, ...] }
 
   PHASE 4 ──────────────────────────────────────────────────────────────────────────────
-  🔗  RESOLUTION
+      RESOLUTION
       Spring Boot parses JSON match array
       Creates junction table records (UserPhoto) for each match
       Success signal dispatched back to client WebSocket / polling endpoint
 
   PHASE 5 ──────────────────────────────────────────────────────────────────────────────
-  🖼️  RETRIEVAL
+      RETRIEVAL
       User authenticates → React requests /api/photos/my
       Spring Boot validates JWT → queries UserPhoto junction table
       Streams binary image data or static URLs back to React Dashboard
@@ -326,7 +326,7 @@ The complete request lifecycle passes through **5 discrete pipeline phases**, ea
 
 ---
 
-## 🧠 ML Pipeline Deep Dive
+##  ML Pipeline Deep Dive
 
 The AI inference pipeline executes four sequential stages, transforming raw image binary into confirmed identity matches.
 
@@ -407,7 +407,7 @@ The 128-dimensional embedding is the result of years of research on the optimal 
 
 ---
 
-## 🗄️ Entity Relationship Diagram
+##  Entity Relationship Diagram
 
 ```
 ┌───────────────────────────────────────────────────────────────────────────────────┐
@@ -417,10 +417,10 @@ The 128-dimensional embedding is the result of years of research on the optimal 
 ┌─────────────────────┐           ┌───────────────────────┐          ┌─────────────────────┐
 │        USER         │           │      USER_PHOTO        │          │        PHOTO        │
 │─────────────────────│           │  (Junction Table)      │          │─────────────────────│
-│ 🔑 user_id (PK)     │ 1       M │───────────────────────│ M      1 │ 🔑 photo_id (PK)    │
-│    username         │───────────│ 🔑 id (PK)            │──────────│ 🔗 event_id (FK)    │
-│    email            │           │ 🔗 user_id (FK)       │          │    file_path        │
-│    password_hash    │           │ 🔗 photo_id (FK)      │          │    original_filename│
+│    user_id (PK)     │ 1       M │───────────────────────│ M      1 │    photo_id (PK)    │
+│    username         │───────────│    id (PK)            │──────────│    event_id (FK)    │
+│    email            │           │    user_id (FK)       │          │    file_path        │
+│    password_hash    │           │    photo_id (FK)      │          │    original_filename│
 │    reference_embed  │           │    confidence_score   │          │    upload_timestamp │
 │    role (HOST/GUEST)│           │    matched_at         │          │    ml_processed     │
 │    created_at       │           └───────────────────────┘          │    face_count       │
@@ -433,8 +433,8 @@ The 128-dimensional embedding is the result of years of research on the optimal 
                                                 ┌─────────────────────┐
                                                 │        EVENT        │
                                                 │─────────────────────│
-                                                │ 🔑 event_id (PK)   │
-                                                │ 🔗 host_id (FK)    │
+                                                │    event_id (PK)   │
+                                                │    host_id (FK)    │
                                                 │    event_name       │
                                                 │    event_date       │
                                                 │    created_at       │
@@ -451,7 +451,7 @@ Key Relationships:
 
 ---
 
-## 🌐 REST API Reference
+##  REST API Reference
 
 All protected endpoints require a valid `Authorization: Bearer <JWT>` header.
 
@@ -466,32 +466,32 @@ All protected endpoints require a valid `Authorization: Bearer <JWT>` header.
 
 | Method | Endpoint | Description | Auth |
 |:------:|----------|-------------|:----:|
-| `GET` | `/api/users/me` | Retrieve authenticated user's profile and metadata | 🔒 JWT |
-| `PUT` | `/api/users/me` | Update user profile or reference embedding | 🔒 JWT |
+| `GET` | `/api/users/me` | Retrieve authenticated user's profile and metadata | JWT |
+| `PUT` | `/api/users/me` | Update user profile or reference embedding | JWT |
 
 ### Events
 
 | Method | Endpoint | Description | Auth |
 |:------:|----------|-------------|:----:|
-| `POST` | `/api/events` | Create a new event (host role required) | 🔒 JWT Host |
-| `GET` | `/api/events/{id}` | Retrieve event metadata and processing statistics | 🔒 JWT |
-| `GET` | `/api/events` | List all events created by the authenticated host | 🔒 JWT Host |
-| `DELETE` | `/api/events/{id}` | Delete event and all associated photo records | 🔒 JWT Host |
+| `POST` | `/api/events` | Create a new event (host role required) | JWT Host |
+| `GET` | `/api/events/{id}` | Retrieve event metadata and processing statistics | JWT |
+| `GET` | `/api/events` | List all events created by the authenticated host | JWT Host |
+| `DELETE` | `/api/events/{id}` | Delete event and all associated photo records | JWT Host |
 
 ### Photos
 
 | Method | Endpoint | Description | Auth |
 |:------:|----------|-------------|:----:|
-| `POST` | `/api/events/{id}/photos` | Upload raw photo batch (multipart/form-data) | 🔒 JWT Host |
-| `GET` | `/api/photos/my` | Retrieve all photos matched to the authenticated user | 🔒 JWT |
-| `GET` | `/api/photos/{id}/stream` | Stream raw binary image data for a specific photo | 🔒 JWT |
+| `POST` | `/api/events/{id}/photos` | Upload raw photo batch (multipart/form-data) | JWT Host |
+| `GET` | `/api/photos/my` | Retrieve all photos matched to the authenticated user | JWT |
+| `GET` | `/api/photos/{id}/stream` | Stream raw binary image data for a specific photo | JWT |
 
 ### ML (Internal)
 
 | Method | Endpoint | Description | Auth |
 |:------:|----------|-------------|:----:|
-| `POST` | `/api/ml/trigger/{eventId}` | Trigger ML pipeline for a given event batch | 🔒 Internal |
-| `GET` | `/api/ml/status/{eventId}` | Poll ML processing status for an event | 🔒 JWT |
+| `POST` | `/api/ml/trigger/{eventId}` | Trigger ML pipeline for a given event batch | Internal |
+| `GET` | `/api/ml/status/{eventId}` | Poll ML processing status for an event | JWT |
 
 ### Example Request / Response
 
@@ -540,7 +540,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ---
 
-## 🛠️ Technology Stack
+##  Technology Stack
 
 ### Frontend — Presentation Layer
 
@@ -586,7 +586,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ---
 
-## 📊 Performance Benchmarks
+##  Performance Benchmarks
 
 ```
 Metric                              Value       Notes
@@ -606,7 +606,7 @@ Stateless ML Engine                 ✅          No session, no persistent state
 
 ---
 
-## 🚀 Installation & Setup
+##  Installation & Setup
 
 ### Prerequisites
 
@@ -644,7 +644,7 @@ Face-Lens/
 
 ### Step 2 — Configure & Start the Backend Core
 
-> ⚠️ **Configure database first.** Edit `FaceLens-sb/src/main/resources/application.properties` and set your database URL, username, and password before building.
+>  **Configure database first.** Edit `FaceLens-sb/src/main/resources/application.properties` and set your database URL, username, and password before building.
 
 ```bash
 cd FaceLens-sb
@@ -664,7 +664,7 @@ mvnw.cmd spring-boot:run
 
 ### Step 3 — Initialize the Python ML Engine
 
-> ⚠️ **Note on dlib:** On some systems, `dlib` requires CMake and a C++ compiler. If `pip install` fails, refer to the [official dlib installation guide](http://dlib.net/compile.html).
+>  **Note on dlib:** On some systems, `dlib` requires CMake and a C++ compiler. If `pip install` fails, refer to the [official dlib installation guide](http://dlib.net/compile.html).
 
 ```bash
 cd ../FaceLens-ml
@@ -722,7 +722,7 @@ npm run dev
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 Face-Lens/
@@ -764,20 +764,20 @@ Face-Lens/
 
 ---
 
-## 📚 Resources & Documentation
+##  Resources & Documentation
 
 | Resource | Link |
 |---|---|
-| 📄 **End-to-End PDF Documentation** | [docs/main.pdf](https://github.com/Aryanplux/Face-Lens/blob/main/docs/main.pdf) |
-| 🎥 **System Tutorial / Walkthrough** | Coming Soon |
-| 📦 **face_recognition Library** | [ageitgey/face_recognition](https://github.com/ageitgey/face_recognition) |
-| 📦 **dlib Documentation** | [dlib.net](http://dlib.net/) |
-| 📦 **Spring Boot Reference** | [spring.io/projects/spring-boot](https://spring.io/projects/spring-boot) |
-| 📦 **React Documentation** | [react.dev](https://react.dev/) |
+|  **End-to-End PDF Documentation** | [docs/main.pdf](https://github.com/Aryanplux/Face-Lens/blob/main/docs/main.pdf) |
+|  **System Tutorial / Walkthrough** | Coming Soon |
+|  **face_recognition Library** | [ageitgey/face_recognition](https://github.com/ageitgey/face_recognition) |
+|  **dlib Documentation** | [dlib.net](http://dlib.net/) |
+|  **Spring Boot Reference** | [spring.io/projects/spring-boot](https://spring.io/projects/spring-boot) |
+|  **React Documentation** | [react.dev](https://react.dev/) |
 
 ---
 
-## 👤 Creator
+##  Creator
 
 <br />
 
