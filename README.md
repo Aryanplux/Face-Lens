@@ -1,7 +1,7 @@
-# 📸 FaceLens
+﻿# FaceLens
 
 <div align="center">
-  <em>An Advanced, AI-Powered Event Photography Management & Distribution System.</em><br>
+  <em>An Advanced, AI-Powered Event Photography Management and Distribution System.</em><br>
   <strong>Developed Exclusively by Aryan Dhiman</strong>
 </div>
 
@@ -9,147 +9,188 @@
 
 <div align="center">
 
-[![Documentation](https://img.shields.io/badge/Docs-Main_Documentation-blue?style=for-the-badge&logo=read-the-docs)](https://github.com/Aryanplux/Face-Lens/blob/main/docs/main.pdf)
-[![Video Tutorial](https://img.shields.io/badge/🎥_Tutorial_Video-Coming_Soon!-orange?style=for-the-badge)](#)
+[![Documentation](https://img.shields.io/badge/Docs-Main_Documentation-blue?style=for-the-badge)](https://github.com/Aryanplux/Face-Lens/blob/main/docs/main.pdf)
+[![Video Tutorial](https://img.shields.io/badge/Tutorial_Video-Coming_Soon!-orange?style=for-the-badge)](#)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](#)
 
 </div>
 
 ---
 
-## 📖 Table of Contents
-1. [Introduction](#-introduction)
-2. [Key Features](#-key-features)
-3. [Architecture (Detailed)](#%EF%B8%8F-architecture-detailed)
-    - [System Overview](#system-overview)
-    - [Frontend (Client Layer)](#frontend-client-layer)
-    - [Backend (Core API Layer)](#backend-core-api-layer)
-    - [Machine Learning (AI Layer)](#machine-learning-ai-layer)
-    - [Data Flow & Processing](#data-flow--processing)
-4. [Technology Stack](#-technology-stack)
-5. [Getting Started (Installation)](#-getting-started-installation)
-6. [Resources](#-resources)
-7. [Creator](#-creator)
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Core Problem Statement and Solution](#core-problem-statement-and-solution)
+3. [Architecture and System Design](#architecture-and-system-design)
+    - [High-Level Architectural Overview](#high-level-architectural-overview)
+    - [Frontend Application Layer](#frontend-application-layer)
+    - [Backend API Service Layer](#backend-api-service-layer)
+    - [Machine Learning and AI Inference Layer](#machine-learning-and-ai-inference-layer)
+    - [Data Flow and State Management](#data-flow-and-state-management)
+4. [Detailed Technology Stack](#detailed-technology-stack)
+5. [Installation and Setup Guide](#installation-and-setup-guide)
+6. [Resources and Documentation](#resources-and-documentation)
+7. [Creator](#creator)
 
 ---
 
-## 🌟 Introduction
+## Introduction
 
-Welcome to **FaceLens**, the next generation of event photo sharing. Traditionally, hosts and attendees struggle with distributing and finding their respective pictures after large gatherings, relying on massive shared drives or tedious manual sorting. 
+Welcome to FaceLens, a highly sophisticated and fully automated event photo sharing platform. In large-scale social gatherings, corporate events, or private parties, photographers capture thousands of images. Distributing these images effectively so that each attendee receives only their relevant pictures has historically been a manual, tedious, and privacy-intruding process. 
 
-**FaceLens** completely automates this process using state-of-the-art Facial Recognition technologies. The platform effortlessly sorts uploaded photos and isolates them for each guest. All a user has to do is register, upload a reference selfie, and the system creates a personalized gallery of every event photo they appear in.
-
-This robust system is securely built using modern web architectures and separates concerns optimally between client, backend, and machine learning components.
+FaceLens revolutionizes this workflow by completely automating photo sorting and distribution. By leveraging state-of-the-art Deep Learning facial recognition models, FaceLens scans massive directories of event photos, maps individuals based on an initial reference selfie, and generates isolated, private galleries for each user almost instantaneously. This project represents a complete, full-stack microservices ecosystem engineered from the ground up to solve real-world media distribution challenges.
 
 ---
 
-## 🔥 Key Features
+## Core Problem Statement and Solution
 
-- **Automated Photo Distribution:** No more scrolling for hours. Finding yourself in thousands of photos happens within seconds.
-- **Smart Facial Recognition:** Powered by a dedicated deep learning microservice providing accurate embedding extraction & face matching.
-- **Secure Event Galleries:** Share your party photos seamlessly through event-specific logins and portals.
-- **Microservices Architecture:** Modular backend isolating heavy machine-learning processes from core REST workloads.
-- **Interactive UI:** Smooth, responsive Front-end experience built using React + Vite.
+**The Problem:**
+When events conclude, attendees often wait days or weeks for a link to a massive, unorganized cloud drive containing thousands of pictures. Guests must spend significant time scrolling through irrelevant pictures to find themselves, leading to a poor user experience and potential privacy concerns as everyone has access to everyone else's candid moments.
 
----
-
-## 🏗️ Architecture (Detailed)
-
-FaceLens is designed with a modern **n-tier microservices architecture** that emphasizes loose coupling, high availability, and separation of concerns.
-
-### System Overview
-The application is strictly decoupled into three main repositories/components:
-1. **FaceLens-Frontend (`frontend/`)**
-2. **FaceLens-Spring Boot Core Backend (`FaceLens-sb/`)**
-3. **FaceLens-Machine Learning Engine (`FaceLens-ml/`)**
-
-### Frontend (Client Layer)
-- **Framework:** React.js bootstrapped with Vite for instant server start & modular bundling.
-- **Responsibilities:** 
-  - Render dynamic user dashboards (`Dashboard.jsx`), event creations (`CreateEvent.jsx`), and interactive galleries (`EventGallery.jsx`).
-  - Manage client local state and JWT-based authentication context.
-  - Deliver responsive UI via CSS variables and grid/flexbox based assets.
-- **Communication:** Communicates exclusively with the Spring Boot Backend via RESTful HTTP requests, transmitting multipart/form-data for event photos and JSON for configurations.
-
-### Backend (Core API Layer)
-- **Framework:** Spring Boot (Java)
-- **Responsibilities:**
-  - Acts as the primary API Gateway and central orchestration hub.
-  - Manages User accounts, Event configurations, security filtering, and file uploads (stored efficiently on predefined disk blocks `uploads/`).
-  - Contains the core persistence logic (DTO structures, Entity modelling, Repository handling).
-  - Whenever a new photo is uploaded, this service persists the file, generates logs, and fires an asynchronous or synchronous payload to the ML Engine to analyze the image content.
-
-### Machine Learning (AI Layer)
-- **Framework:** Python, exposing capabilities heavily reliant on native computer vision modules (`testML.py`, `main.py`).
-- **Responsibilities:**
-  - Operates as a stateless microservice.
-  - Ingests image data/paths sent from the Spring Boot API.
-  - **Pipeline:** Runs face detection algorithms -> Crops faces -> Transforms images into dense embeddings -> Computes Euclidean or Cosine distances against registered user base profiles.
-  - Returns JSON matched IDs to the Spring Boot Core which subsequently updates the database relationships.
-
-### Data Flow & Processing
-1. **Ingestion:** User hits the `/upload` endpoint on the frontend.
-2. **Storage:** The Spring Boot API validates tokens, accepts the payload, and saves the binary data efficiently.
-3. **Inference:** A sub-request is immediately forwarded to the Python ML server.
-4. **Resolution:** Python identifies faces, evaluates high-dimensional mappings, and feeds the resulting recognized `UserId`s back to the Spring Boot API.
-5. **Retrieval:** When an attendee logs into their Dashboard, Spring Boot dynamically queries for all images mapped to their `UserId`, serving them directly through the React App.
+**The FaceLens Solution:**
+FaceLens operates on a simple premise:
+1. An event host uploads a raw batch of event photos to the platform.
+2. Attendees register on the platform and provide a single reference image (a selfie).
+3. The FaceLens automated ML pipeline processes the event batch, extracting facial embeddings and comparing them against the attendees' reference embeddings using advanced distance metrics.
+4. Attendees immediately receive a highly curated, private dashboard containing *only* the photos in which they are present.
 
 ---
 
-## 💻 Technology Stack
+## Architecture and System Design
 
-| Aspect | Technology |
-| --- | --- |
-| **Frontend** | React, Vite, CSS3, JavaScript |
-| **Backend** | Java, Spring Boot, Maven, REST APIs |
-| **Machine Learning** | Python, Computer Vision Libraries (OpenCV / face_recognition/ dlib) |
-| **Documentation** | LaTeX (TeX Live) |
-| **Version Control** | Git, GitHub |
+FaceLens is engineered using an advanced n-tier microservices architecture. It strictly decouples the client side, the core business logic, and the heavy machine learning inference engine. This decoupling ensures high scalability, fault tolerance, and independent deployment cycles.
 
----
+### High-Level Architectural Overview
+The system is divided into three distinct operational domains:
+- **FaceLens Frontend:** A Single Page Application (SPA) providing the user interface.
+- **FaceLens Core API (Spring Boot):** The central orchestrator handling user management, persistence, security, and multiplexing payload distribution.
+- **FaceLens AI Engine (Python):** A headless, stateless inference service dedicated solely to matrix operations, image processing, and facial embedding generation.
 
-## 🚀 Getting Started (Installation)
+### Frontend Application Layer
+The frontend is designed with performance and modularity in mind.
+- **Component-Driven UI:** Built entirely upon React functional components. The hierarchy separates generic UI elements (GlobalLogo, GlobalThemeToggle) from complex page views (Dashboard, EventGallery, UploadPage).
+- **Routing and State:** Employs dynamic client-side routing to seamlessly transition users from landing pages to authenticated dashboards.
+- **Interceptors and Security:** Utilizes dedicated service modules (uthService.js) to handle token management, attaching JWTs to outgoing requests and handling asynchronous HTTP states (loading, success, error) securely during large file uploads.
 
-*(A complete runbook is available within the separate folders)*
+### Backend API Service Layer
+The backend follows Domain-Driven Design (DDD) principles implemented within the Spring Boot ecosystem.
+- **Controller Layer:** Exposes RESTful endpoints mapped to specific resources (e.g., /api/users, /api/events, /api/photos).
+- **Service Layer:** Contains the core business logic. For instance, when a photo batch is received, the service layer parallelizes the storage logic, writing to defined static paths (/uploads/event_id/photos), and prepares metadata payloads.
+- **Data Access Layer / Persistence:** Utilizes Spring Data JPA to interface with the relational database. Entities are strictly mapped using ORM, representing complex one-to-many relationships (Event to Photos) and many-to-many relationships (Users to Photos).
+- **Inter-Service Communication:** Once photos are persisted, the Spring Boot core executes internal REST calls or message payloads to the Machine Learning microservice, forwarding file paths/URIs for the ML component to analyze independently.
 
-1. **Clone the project:**
-   ```bash
-   git clone https://github.com/Aryanplux/Face-Lens.git
-   ```
-2. **Run the Core Backend (FaceLens-sb):**
-   ```bash
-   cd FaceLens-sb
-   # For Windows
-   mvnw.cmd spring-boot:run
-   ```
-3. **Run the Machine Learning Service (FaceLens-ml):**
-   ```bash
-   cd FaceLens-ml
-   pip install -r requirements.txt
-   python main.py
-   ```
-4. **Run the Frontend:**
-   ```bash
-   cd frontend
-   npm install
-   npm run dev
-   ```
+### Machine Learning and AI Inference Layer
+This is the mathematical core of FaceLens.
+- **Preprocessing:** When invoked, the Python pipeline reads the image binary, standardizes the color space (BGR to RGB), and normalizes the resolution to prevent out-of-memory multi-dimensional tensor errors.
+- **Face Detection:** Utilizes Convolutional Neural Networks (CNNs) or Histogram of Oriented Gradients (HOG) to draw bounding boxes around human faces in dynamic crowd shots.
+- **Embedding Extraction:** Crops the detected faces, passing them through a deep ResNet (Residual Neural Network) trained on massive facial datasets to generate a 128-dimensional encodings.
+- **Distance Metrics & Matching:** For every extracted face matrix, the system calculates the Euclidean distance or Cosine similarity against stored 128-D reference profiles in the active database. If the distance falls below a rigid statistical threshold, a match is confirmed and the mapping is returned to the Java backend.
+
+### Data Flow and State Management
+1. **Upload Phase:** Multipart/form-data is transmitted via secure HTTP POST from React -> Spring Boot. Spring Boot saves the file to local block storage and logs the metadata in SQL.
+2. **Processing Phase:** Spring Boot triggers the Python Engine via an internal HTTP request, passing the absolute location of the newly verified file. 
+3. **Inference Phase:** Python executes the detection scripts (main.py, 	estML.py), matches extracted faces against known identities, and returns a JSON array of MatchedUserIDs.
+4. **Resolution Phase:** Spring Boot parses the AI response, creates relational records, and dispatches success signals back to the client.
+5. **Retrieval Phase:** Upon user login, React requests matching images. Spring Boot authenticates the token, queries the junction tables, and streams the binary image data or static URLs back to the client frontend.
 
 ---
 
-## 📚 Resources
+## Detailed Technology Stack
 
-All heavy technical documentation, algorithmic formulas, and LaTeX structured blueprints are consolidated in a unified PDF:
+The technical stack involves heavy enterprise-grade frameworks tailored to performance and scalability.
 
-👉 **[Official FaceLens PDF Documentation & Architecture Manual](https://github.com/Aryanplux/Face-Lens/blob/main/docs/main.pdf)**
+### Frontend (Presentation Layer)
+- **React 18:** For maintaining high-performance virtual DOM rendering.
+- **Vite:** Next-generation frontend tooling providing rapid Hot Module Replacement (HMR) and optimized build bundling.
+- **CSS3 / Node Modules:** Custom modular stylesheets (UploadPage.css, EventGallery.css) ensuring component-scoped styling and responsive flex/grid layouts.
+- **Axios:** For robust promise-based HTTP client operations.
 
-👉 **[🎥 Tutorial Video - Coming Soon!](#)**
+### Backend Core (Application Layer)
+- **Java 17:** Primary server-side programming language.
+- **Spring Boot 3.x:** Enterprise application framework utilizing auto-configuration and rapid API bootstrapping.
+- **Spring Security & JWT:** Stateless authentication mechanisms ensuring API endpoints remain highly protected.
+- **Spring Data JPA / Hibernate:** For robust Object Relational Mapping (ORM) abstracting raw SQL logic.
+- **Maven:** Comprehensive project management, build lifecycle orchestration, and dependency resolution.
+
+### Machine Learning (Inference Layer)
+- **Python 3.10+:** Industry-standard language for machine learning mathematical execution.
+- **OpenCV (cv2):** Library used for real-time computer vision transformations and image thresholding.
+- **face_recognition / dlib:** Advanced libraries utilizing C++ under the hood for deep learning facial topography models.
+- **NumPy:** For high-performance vectorized implementations of array manipulations (N-dimensional arrays).
+
+### Infrastructure & Tooling
+- **LaTeX:** For generating mathematically rigorous and highly formatted architectural documentation (docs/main.tex).
+- **Git / GitHub:** Primary version control system ensuring branch stability.
 
 ---
 
-## 👨‍💻 Creator
+## Installation and Setup Guide
 
-This immense platform was designed, engineered, and completely developed by:
+Please ensure you have Node.js, Java SDK (17+), Maven, and Python installed on your local machine prior to executing the environment.
 
-**Aryan Dhiman**
-*Software Engineer & Deep Learning Enthusiast* 
+### 1. Repository Clone
+\\\ash
+git clone https://github.com/Aryanplux/Face-Lens.git
+cd Face-Lens
+\\\
+
+### 2. Initializing Backend Core (FaceLens-sb)
+The Spring Boot application acts as the master node. Ensure your local database properties are configured in \pplication.properties\.
+\\\ash
+cd FaceLens-sb
+
+# For Windows environments
+mvnw.cmd clean install
+mvnw.cmd spring-boot:run
+
+# For Unix environments
+./mvnw clean install
+./mvnw spring-boot:run
+\\\
+
+### 3. Initializing AI Engine (FaceLens-ml)
+The Python AI engine requires standard build environments and dependencies.
+\\\ash
+cd ../FaceLens-ml
+
+# Create an isolated virtual environment
+python -m venv venv
+# Windows: venv\\Scripts\\activate 
+# Unix: source venv/bin/activate    
+
+# Install required packages
+pip install -r requirements.txt
+
+# Execute the ML listener
+python main.py
+\\\
+
+### 4. Initializing React Frontend (frontend)
+The client operates on a separate port utilizing Vite.
+\\\ash
+cd ../frontend
+
+# Install Node dependencies
+npm install
+
+# Start the fast-refresh development server
+npm run dev
+\\\
+
+---
+
+## Resources and Documentation
+
+For a deep academic analysis of the algorithms, statistical thresholds, ER diagrams, and system state machines, refer directly to the compiled documentation below.
+
+- **Official FaceLens End-to-End PDF Documentation:** [View main.pdf within repository](https://github.com/Aryanplux/Face-Lens/blob/main/docs/main.pdf)
+- **System Tutorial Video / Walkthrough:** [Coming Soon](#)
+
+---
+
+## Creator
+
+This extensive intelligent system, including the React client, Spring Boot architecture, and Python ML pipelines, was researched, engineered, and independently developed by:
+
+**Aryan Dhiman**  
+*Software Engineer and Deep Learning Enthusiast*  
+*Project completed as a solo endeavor spanning full-stack and AI spectrums.*
